@@ -1,0 +1,12 @@
+# IDE
+.idea
+
+# Logs
+*.log
+
+# Project dependencies
+node_modules
+
+# Build directory
+/public/*
+!/public/*.html
