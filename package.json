@@ -15,8 +15,9 @@
     "css-loader": "^1.0.0",
     "hammerjs": "^2.0.8",
     "less": "^3.8.0",
-    "less-loader": "^4.1.0",
+    "node-sass": "^4.9.3",
     "normalize.css": "^8.0.0",
+    "sass-loader": "^7.1.0",
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
     "webpack": "^4.20.2"
