@@ -10,3 +10,4 @@ node_modules
 # Build directory
 /public/*
 !/public/*.html
+!/public/api
