@@ -1,0 +1,24 @@
+$font__arial:  ArialMT;
+$font__arial--bold:  Arial-BoldMT;
+
+$font__size: 16px;
+
+$screen__mobile: 0em;
+$screen__mobile--big: 576px;
+$screen__tablet: 768px;
+$screen__tablet--big: 992px;
+$screen__desktop: 1200px;
+
+$mobile: "(min-width: #{$screen__mobile})";
+$mobile--big: "(min-width: #{$screen__mobile--big})";
+$tablet: "(min-width: #{$screen__tablet})";
+$tablet--big: "(min-width: #{$screen__mobile--big})";
+$desktop: "(min-width: #{$screen__tablet})";
+
+$mobile--till: "(min-width: #{$screen__mobile--big})";
+$tablet--till: "(min-width: #{$screen__mobile--big})";
+$desktop--till: "(min-width: #{$screen__desktop})";
+
+$mobile--only: "(max-width: #{$screen__mobile--big})";
+$tablet--only: "(min-width: #{$screen__tablet}) and (max-width: #{$screen__tablet--big})";
+$desktop--only: "(min-width: #{$screen__desktop})";

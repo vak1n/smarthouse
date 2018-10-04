@@ -1,0 +1,10 @@
+@import "variables";
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  font-size: $font__size;
+}
