@@ -1,0 +1,12 @@
+@import "../variables";
+
+/**
+ * Возвращает единицы имерения rem
+ * .text {
+ *   font-size: rem(14px);
+ * }
+ */
+@function rem($size) {
+  $rem: $size / $font__size;
+  @return #{$rem}rem;
+}

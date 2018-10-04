@@ -1,0 +1,29 @@
+{
+  "links": [
+    {
+      "name": "Сводка",
+      "href": "#",
+      "active": true
+    },
+    {
+      "name": "Устройства",
+      "href": "#",
+      "active": false
+    },
+    {
+      "name": "События",
+      "href": "#",
+      "active": false
+    },
+    {
+      "name": "Сценарии",
+      "href": "#",
+      "active": false
+    },
+    {
+      "name": "Лицензия",
+      "href": "https://wiki.yandex.ru/shri-2018-II/homework/Adaptivnaja-vjorstka/.files/license.pdf",
+      "active": false
+    }
+  ]
+}
