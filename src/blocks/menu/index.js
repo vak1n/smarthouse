@@ -3,11 +3,11 @@ import './style.scss';
 document.addEventListener('DOMContentLoaded', () => {
   fetch('/api/menu.json')
     .then(response => response.json())
-    .then((menu) => {
+    .then(menu => {
       const menuList = document.querySelectorAll('.menu__list');
       const menuItem = document.getElementById('menu__item');
-      for (let i = 0; i < menuList.length; i++) {
-        menu.links.forEach((link) => {
+      for (let i = 0; i < menuList.length; i += 1) {
+        menu.links.forEach(link => {
           const itemNode = menuItem.content.cloneNode(true);
           const linkNode = itemNode.querySelector('.menu__link');
           linkNode.href = link.href;
@@ -20,17 +20,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-  document.querySelector('.menu__burger').addEventListener('click', (event) => {
+  document.querySelector('.menu__burger').addEventListener('click', event => {
     event.stopPropagation();
     document.querySelector('.menu__wrapper').classList.toggle('menu__wrapper--show');
   });
 
-  document.querySelector('.page').addEventListener('click', (event) => {
+  document.querySelector('.page').addEventListener('click', event => {
     event.stopPropagation();
     document.querySelector('.menu__wrapper').classList.remove('menu__wrapper--show');
   });
 
-  document.querySelector('.menu__wrapper').addEventListener('click', (event) => {
+  document.querySelector('.menu__wrapper').addEventListener('click', event => {
     event.stopPropagation();
   });
 });
