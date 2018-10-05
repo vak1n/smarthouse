@@ -18,7 +18,7 @@
       height: 100vh;
       width: 160px;
       transition: right 0.5s ease;
-      right: -200px;
+      right: -300px;
       padding: 50px 10px 20px 50px;
       z-index: 1;
       background-color: $color__background;
@@ -43,7 +43,7 @@
   }
 
   &__link {
-    font-family: $font__arial--bold;
+    font-family: $font__main--bold;
     text-decoration: none;
     font-size: 1rem;
     opacity: 0.6;
@@ -55,7 +55,7 @@
     }
 
     &--footer {
-      font-family: $font__arial;
+      font-family: $font__main;
       font-size: rem(12px);
       color: #858585;
       line-height: 1;

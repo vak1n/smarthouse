@@ -22,8 +22,8 @@
             <div class="header__menu">
                 <div class="menu">
                     <nav class="menu__wrapper menu__wrapper--header">
-                        <ul class="menu__list">
-                            <template id="menu__item--header">
+                        <ul class="menu__list js-menu__list--header">
+                            <template id="menuItemHeader">
                                 <li class="menu__item">
                                     <a class="menu__link" href="#"></a>
                                 </li>
@@ -36,13 +36,105 @@
         </header>
     </div>
     <div class="page__content">
+        <div class="events">
+            <h1 class="events__title">Лента событий</h1>
+            <template id="event">
+                <div class="event">
+                    <div class="event__info">
+                        <div class="event__icon"></div>
+                        <div class="event__title"></div>
+                        <div class="event__name"></div>
+                        <div class="event__date"></div>
+                    </div>
+                </div>
+            </template>
+            <template id="eventData">
+                <div class="event__data">
+                    <div class="event__description"></div>
+                </div>
+            </template>
+            <template id="eventGraph">
+                <div class="event__graph">
+                    <img class="graph"
+                         srcset="assets/graph.png 590w,
+                                assets/graph@2x.png 1180w,
+                                assets/graph@3x.png 1770W"
+                         sizes="(max-width: 590px) 550px,
+                                (max-width: 1180px) 1140px,
+                                1770px"
+                         alt="graph"
+                         title="graph"
+                    >
+                </div>
+            </template>
+            <template id="eventMicroclimate">
+                <div class="event__microclimate">
+                    <div class="microclimate">
+                        <div class="microclimate__temperature">
+                            <span class="microclimate__value-name">Температура:</span>
+                            <span class="microclimate__value microclimate__value--temperature"></span>
+                        </div>
+                        <div class="microclimate__humidity">
+                            <span class="microclimate__value-name">Влажность:</span>
+                            <span class="microclimate__value microclimate__value--humidity"></span>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <template id="eventMedia">
+                <div class="event__media">
+                    <div class="media">
+                        <img class="media__albumcover">
+                        <div class="media__artist"></div>
+                        <input class="media__time" type="range">
+                        <label class="media__time-value"></label>
+                        <button class="media__prev"></button>
+                        <button class="media__next"></button>
+                        <input class="media__volume" type="range">
+                        <label class="media__volume-value"></label>
+                    </div>
+                </div>
+            </template>
+            <template id="eventButtons">
+                <div class="event__buttons">
+                    <button class="button button--yellow button--col1">Да</button>
+                    <button class="button button--grey button--col2">Нет</button>
+                </div>
+            </template>
+            <template id="eventWalle">
+                <div class="event__walle">
+                    <div class="walle">
+                        <img class="walle__img"
+                             srcset="assets/robot.png 832w,
+                                    assets/robot@2x.png 1664w,
+                                    assets/robot@3x.png 2496W"
+                             sizes="(max-width: 832px) 792px,
+                                    (max-width: 1664px) 1624px,
+                                    2496px"
+                             alt="graph"
+                             title="graph"
+                        >
+                        <div class="walle__control">
+                            <div class="walle__zoom">
+                                <span class="walle__value-name">Приближение:</span>
+                                <span class="walle__value walle__value--zoom">78</span>
+                            </div>
+                            <div class="walle__brightness">
+                                <span class="walle__value-name">Яркость:</span>
+                                <span class="walle__value walle__value--brightness">50</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
     </div>
     <div class="page__footer">
         <footer class="footer">
             <div class="footer__menu">
                 <nav class="menu__wrapper menu__wrapper--footer">
-                    <ul class="menu__list">
-                        <template id="menu__item--footer">
+                    <ul class="menu__list js-menu__list--footer">
+                        <template id="menuItemFooter">
                             <li class="menu__item menu__item--inline">
                                 <a class="menu__link menu__link--footer" href="#"></a>
                             </li>
@@ -50,7 +142,7 @@
                     </ul>
                 </nav>
             </div>
-            <div class="footer__copyright">© 2001–2017  ООО «Яндекс»</div>
+            <div class="footer__copyright">© 2001–2017 ООО «Яндекс»</div>
         </footer>
     </div>
 </div>

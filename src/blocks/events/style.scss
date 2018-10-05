@@ -1,0 +1,17 @@
+@import "../../variables";
+@import "../../mixins/rem";
+
+.events {
+  display: grid;
+
+  &__title {
+    font-family: $font__main--bold;
+    font-size: rem(24px);
+    color: $color__text;
+    margin: 0 0 10px 0;
+  }
+
+  &__event {
+
+  }
+}

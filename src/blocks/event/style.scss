@@ -1,0 +1,197 @@
+@import "../../variables";
+@import "../../mixins/rem";
+
+.event {
+  margin-bottom: 15px;
+
+  &__info {
+    display: grid;
+    grid-template-columns: repeat(10, 10%);
+    border-radius: 20px;
+    padding: 25px 18px 20px 18px;
+    background: #FAFAFA;
+
+    &--critical {
+      background: #DB5341;
+      color: #ffffff;
+      border-radius: 20px 20px 0 0;
+      padding: 25px 18px 40px 18px;
+    }
+  }
+
+  &__icon {
+    grid-column-start: 1;
+    align-self: center;
+
+    &--stats {
+      background: url("../../../assets/stats.svg") no-repeat;
+      height: 17px;
+      width: 35px;
+
+      &--white {
+        background: url("../../../assets/stats-white.svg") no-repeat;
+      }
+    }
+
+    &--key {
+      background: url("../../../assets/key.svg") no-repeat;
+      height: 32px;
+      width: 35px;
+      fill: #ffffff;
+
+      &--white {
+        background: url("../../../assets/key-white.svg") no-repeat;
+      }
+    }
+
+    &--robot-cleaner {
+      background: url("../../../assets/robot-cleaner.svg") no-repeat;
+      height: 21px;
+      width: 35px;
+
+      &--white {
+        background: url("../../../assets/robot-cleaner-white.svg") no-repeat;
+      }
+    }
+
+    &--router {
+      background: url("../../../assets/router.svg") no-repeat;
+      height: 31px;
+      width: 34px;
+
+      &--white {
+        background: url("../../../assets/router-white.svg") no-repeat;
+      }
+    }
+
+    &--thermal {
+      background: url("../../../assets/thermal.svg") no-repeat;
+      height: 35px;
+      width: 35px;
+
+      &--white {
+        background: url("../../../assets/thermal-white.svg") no-repeat;
+      }
+    }
+
+    &--ac {
+      background: url("../../../assets/air-conditioner.svg") no-repeat;
+      height: 29px;
+      width: 35px;
+
+      &--white {
+        background: url("../../../assets/ac-white.svg") no-repeat;
+      }
+    }
+
+    &--music {
+      background: url("../../../assets/music.svg") no-repeat;
+      height: 36px;
+      width: 36px;
+
+      &--white {
+        background: url("../../../assets/music-white.svg") no-repeat;
+      }
+    }
+
+    &--fridge {
+      background: url("../../../assets/fridge.svg") no-repeat;
+      height: 35px;
+      width: 28px;
+
+      &--white {
+        background: url("../../../assets/fridge-white.svg") no-repeat;
+      }
+    }
+
+    &--battery {
+      background: url("../../../assets/battery.svg") no-repeat;
+      height: 18px;
+      width: 35px;
+
+      &--white {
+        background: url("../../../assets/battery-white.svg") no-repeat;
+      }
+    }
+
+    &--cam {
+      background: url("../../../assets/robot-cleaner.svg") no-repeat;
+      height: 36px;
+      width: 36px;
+
+      &--white {
+        background: url("../../../assets/robot-cleaner-white.svg") no-repeat;
+      }
+    }
+
+    &--kettle {
+      background: url("../../../assets/kettle.svg") no-repeat;
+      height: 35px;
+      width: 30px;
+
+
+      &--white {
+        background: url("../../../assets/kettle-white.svg") no-repeat;
+      }
+    }
+  }
+
+  &__title {
+    grid-column: 2 / 11;
+    font-family: $font__main--bold;
+    font-size: rem(14px);
+    padding-left: 15px;
+  }
+
+  &__name {
+    grid-column: 1 / 6;
+    font-family: $font__main;
+    font-size: rem(12px);
+    margin-top: 18px;
+  }
+
+  &__date {
+    grid-column: 6 / 11;
+    justify-self: right;
+    font-family: $font__main;
+    font-size: rem(12px);
+    margin-top: 18px;
+  }
+
+  &__data {
+    background: #FAFAFA;
+    color: $color__text;
+    padding: 25px 18px 20px 18px;
+    border-radius: 20px;
+    margin-top: -25px;
+  }
+
+  &__description {
+    font-family: $font__main;
+    font-size: rem(18px);
+  }
+
+  &__graph {
+    margin-top: 40px;
+  }
+
+  &__microclimate {
+    margin-top: 20px;
+  }
+
+  &__media {
+    margin-top: 20px;
+  }
+
+  &__buttons {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 132px 132px;
+    grid-template-rows: 1fr;
+    justify-content: space-between;
+  }
+
+  &__walle {
+    margin-top: 20px;
+  }
+}
