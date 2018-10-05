@@ -3,27 +3,27 @@
     {
       "name": "Сводка",
       "href": "#",
-      "active": true
+      "selected": true
     },
     {
       "name": "Устройства",
       "href": "#",
-      "active": false
+      "status": ""
     },
     {
       "name": "События",
       "href": "#",
-      "active": false
+      "selected": false
     },
     {
       "name": "Сценарии",
       "href": "#",
-      "active": false
+      "selected": false
     },
     {
       "name": "Лицензия",
       "href": "https://wiki.yandex.ru/shri-2018-II/homework/Adaptivnaja-vjorstka/.files/license.pdf",
-      "active": false
+      "selected": false
     }
   ]
 }

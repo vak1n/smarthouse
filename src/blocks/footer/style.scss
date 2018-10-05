@@ -1,3 +1,10 @@
-.template {
+@import "../../variables";
+@import "../../mixins/rem";
 
+.footer {
+  &__copyright {
+    font-family: $font__arial;
+    font-size: rem(12px);
+    color: #858585;
+  }
 }

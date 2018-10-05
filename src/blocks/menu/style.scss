@@ -10,15 +10,18 @@
   }
 
   &__wrapper {
-    display: block;
-    position: fixed;
-    top: 0;
-    height: 100vh;
-    width: 160px;
-    transition: right 0.5s ease;
-    right: -200px;
-    padding: 50px 10px 20px 50px;
-    z-index: 1;
+
+    &--header {
+      display: block;
+      position: fixed;
+      top: 0;
+      height: 100vh;
+      width: 160px;
+      transition: right 0.5s ease;
+      right: -200px;
+      padding: 50px 10px 20px 50px;
+      z-index: 1;
+    }
 
     &--show {
       right: 0;
@@ -27,6 +30,15 @@
 
   &__list {
     list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+  }
+
+  &__item {
+    &--inline {
+      display: inline;
+      margin-right: 3px;
+    }
   }
 
   &__link {
@@ -37,7 +49,15 @@
     color: #333333;
     line-height: rem(24px);
 
-    &--active {
+    &--selected {
+      opacity: 1;
+    }
+
+    &--footer {
+      font-family: $font__arial;
+      font-size: rem(12px);
+      color: #858585;
+      line-height: 1;
       opacity: 1;
     }
   }

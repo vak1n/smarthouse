@@ -5,17 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(response => response.json())
     .then(menu => {
       const menuList = document.querySelectorAll('.menu__list');
-      const menuItem = document.getElementById('menu__item');
       for (let i = 0; i < menuList.length; i += 1) {
         menu.links.forEach(link => {
-          const itemNode = menuItem.content.cloneNode(true);
-          const linkNode = itemNode.querySelector('.menu__link');
+          const itemNode = menuList[i].getElementsByTagName('template')[0].content.cloneNode(true);
+          const linkNode = itemNode.querySelector('a');
           linkNode.href = link.href;
           linkNode.textContent = link.name;
-          if (link.active) {
-            linkNode.classList.add('menu__link--active');
+          if (link.selected) {
+            linkNode.classList.add('menu__link--selected');
           }
-          menuList[0].appendChild(itemNode);
+          menuList[i].appendChild(itemNode);
         });
       }
     });
