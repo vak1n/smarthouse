@@ -9,8 +9,16 @@ body {
 html {
   font-size: $font__size--mobile;
 
+  @media #{$mobile--big} {
+    font-size: $font__size--mobile--big;
+  }
+
   @media #{$tablet} {
     font-size: $font__size--tablet;
+  }
+
+  @media #{$tablet--big} {
+    font-size: $font__size--tablet--big;
   }
 
   @media #{$desktop} {
