@@ -331,9 +331,10 @@
   &__buttons {
     margin-top: 20px;
     display: grid;
-    grid-template-columns: 132px 132px;
+    grid-template-columns: minmax(100px, 132px) minmax(100px, 132px);
     grid-template-rows: 1fr;
     justify-content: space-between;
+    grid-column-gap: 10px;
   }
 
   &__walle {
