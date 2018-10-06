@@ -6,7 +6,7 @@
  *   font-size: rem(14px);
  * }
  */
-@function rem($size) {
-  $rem: $size / $font__size--mobile;
+@function rem($px) {
+  $rem: $px / $font__size--mobile;
   @return #{$rem}rem;
 }

@@ -26,6 +26,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     padding-right: 20px;
+
+    @media #{$tablet} {
+      font-size: rem(14px);
+    }
   }
 
   &__time {
@@ -378,6 +382,10 @@
     align-self: center;
     justify-self: right;
     color: #A1A1A1;
+
+    @media #{$tablet} {
+      font-size: rem(10px);
+    }
   }
 
   &__volume-value {
@@ -391,6 +399,10 @@
 
     &:after {
       content: '%';
+    }
+
+    @media #{$tablet} {
+      font-size: rem(10px);
     }
   }
 }

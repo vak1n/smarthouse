@@ -14,10 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
           eventTemplate.querySelector('.event__info').classList.add('event__info--critical');
           eventTemplate.querySelector('.event__icon').classList.add(`event__icon--${event.icon}--white`);
         }
-        eventTemplate.querySelector('.event__title').classList.add(`event__title--${event.size}`);
         eventTemplate.querySelector('.event__title').textContent = event.title;
+        eventTemplate.querySelector('.event__title').classList.add(`event__title--${event.size}`);
         eventTemplate.querySelector('.event__name').textContent = event.source;
+        eventTemplate.querySelector('.event__name').classList.add(`event__name--${event.size}`);
         eventTemplate.querySelector('.event__date').textContent = event.time;
+        eventTemplate.querySelector('.event__date').classList.add(`event__date--${event.size}`);
 
         if (event.description || event.data) {
           const eventDataTemplate = eventsNode.querySelector('#eventData').content.cloneNode(true);
@@ -40,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (event.data.track) {
               eventMediaTemplate.querySelector('.media__albumcover').src = event.data.albumcover;
-              eventMediaTemplate.querySelector('.media__artist').textContent = `${event.data.artist} ${
+              eventMediaTemplate.querySelector('.media__artist').textContent = `${event.data.artist} - ${
                 event.data.track.name
               }`;
               eventMediaTemplate.querySelector('.media__time-value').textContent = event.data.track.length;
@@ -59,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           }
 
+          eventDataTemplate.querySelector('.event__description').classList.add(`event__description--${event.size}`);
           eventDataTemplate.querySelector('.event__description').textContent = event.description;
           eventTemplate.querySelector('.event').appendChild(eventDataTemplate);
         }
