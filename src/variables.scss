@@ -14,7 +14,7 @@ $screen__desktop: 1200px;
 $mobile: "(min-width: #{$screen__mobile})";
 $mobile--big: "(min-width: #{$screen__mobile--big})";
 $tablet: "(min-width: #{$screen__tablet})";
-$tablet--big: "(min-width: #{$screen__mobile--big})";
+$tablet--big: "(min-width: #{$screen__tablet--big})";
 $desktop: "(min-width: #{$screen__tablet})";
 
 $mobile--till: "(min-width: #{$screen__mobile--big})";

@@ -1,19 +1,19 @@
 {
   "links": [
     {
-      "name": "Сводка",
+      "name": "События",
       "href": "#",
       "selected": true
+    },
+    {
+      "name": "Сводка",
+      "href": "#",
+      "selected": false
     },
     {
       "name": "Устройства",
       "href": "#",
       "status": ""
-    },
-    {
-      "name": "События",
-      "href": "#",
-      "selected": false
     },
     {
       "name": "Сценарии",

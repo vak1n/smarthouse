@@ -7,6 +7,10 @@
     height: 14px;
     width: 16px;
     z-index: 2;
+    
+    @media #{$tablet} {
+      display: none;
+    }
   }
 
   &__wrapper {
@@ -22,6 +26,18 @@
       padding: 50px 10px 20px 50px;
       z-index: 1;
       background-color: $color__background;
+
+      @media #{$tablet} {
+        position: inherit;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        transition: none;
+        right: 0;
+        padding: 3px 0 0 0;
+        z-index: 1;
+        background-color: $color__background;;
+      }
     }
 
     &--show {
@@ -36,6 +52,11 @@
   }
 
   &__item {
+    @media #{$tablet} {
+      display: inline;
+      margin-right:  20px;
+    }
+
     &--inline {
       display: inline;
       margin-right: 3px;
