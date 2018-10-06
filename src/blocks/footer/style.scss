@@ -2,10 +2,36 @@
 @import "../../mixins/rem";
 
 .footer {
+  @media #{$desktop } {
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  @media #{$tablet} {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 64px;
+    align-items: center;
+  }
+
+  &__menu {
+    @media #{$tablet} {
+      grid-column-start: 1;
+      justify-self: left;
+    }
+  }
+
   &__copyright {
     font-family: $font__main;
     font-size: rem(12px);
     color: #858585;
     margin-bottom: 10px;
+
+    @media #{$tablet} {
+      grid-column-start: 2;
+      margin-bottom: 0;
+      justify-self: right;
+    }
   }
 }
