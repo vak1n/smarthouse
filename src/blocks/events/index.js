@@ -9,10 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const eventTemplate = eventsNode.querySelector('#event').content.cloneNode(true);
         eventTemplate.querySelector('.events__event').classList.add(`events__event--${event.size}`);
         eventTemplate.querySelector('.event__icon').classList.add(`event__icon--${event.icon}`);
+        eventTemplate.querySelector('.event__icon').classList.add(`event__icon--${event.size}`);
         if (event.type === 'critical') {
           eventTemplate.querySelector('.event__info').classList.add('event__info--critical');
           eventTemplate.querySelector('.event__icon').classList.add(`event__icon--${event.icon}--white`);
         }
+        eventTemplate.querySelector('.event__title').classList.add(`event__title--${event.size}`);
         eventTemplate.querySelector('.event__title').textContent = event.title;
         eventTemplate.querySelector('.event__name').textContent = event.source;
         eventTemplate.querySelector('.event__date').textContent = event.time;
