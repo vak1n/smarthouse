@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const eventsNode = document.querySelector('.events');
       json.events.forEach(event => {
         const eventTemplate = eventsNode.querySelector('#event').content.cloneNode(true);
+        eventTemplate.querySelector('.events__event').classList.add(`events__event--${event.size}`);
         eventTemplate.querySelector('.event__icon').classList.add(`event__icon--${event.icon}`);
         if (event.type === 'critical') {
           eventTemplate.querySelector('.event__info').classList.add('event__info--critical');

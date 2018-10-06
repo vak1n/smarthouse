@@ -7,6 +7,6 @@
  * }
  */
 @function rem($size) {
-  $rem: $size / $font__size;
+  $rem: $size / $font__size--mobile;
   @return #{$rem}rem;
 }

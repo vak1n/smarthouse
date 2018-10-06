@@ -2,16 +2,46 @@
 @import "../../mixins/rem";
 
 .events {
-  display: grid;
+  @media #{$tablet} {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-column-gap: 20px;
+    grid-auto-flow: row dense revert;
+    grid-template-rows: auto;
+  }
 
   &__title {
     font-family: $font__main--bold;
     font-size: rem(24px);
     color: $color__text;
     margin: 0 0 10px 0;
+
+    @media #{$tablet} {
+      margin: 20px 0 20px 0;
+      grid-column: 1/7;
+    }
+
+    @media #{$desktop} {
+      margin: 40px 0 40px 0;
+    }
   }
 
   &__event {
+    @media #{$desktop} {
+      &--s {
+        grid-column: span 2;
+        grid-row: span 1;
+      }
 
+      &--m {
+        grid-column: span 3;
+        grid-row: span 2;
+      }
+
+      &--l {
+        grid-column: span 4;
+        grid-row: span 3;
+      }
+    }
   }
 }

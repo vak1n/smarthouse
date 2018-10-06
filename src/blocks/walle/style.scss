@@ -27,13 +27,13 @@
 
   &__value-name {
     font-family: $font__main;
-    font-size: 12px;
+    font-size: rem(12px);
     color: #333333;
   }
 
   &__value {
     font-family: $font__main;
-    font-size: 12px;
+    font-size: rem(12px);
     color: #333333;
 
     &:after {
