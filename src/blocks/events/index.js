@@ -1,4 +1,5 @@
 import './style.scss';
+import Touch from '../../modules/touch';
 
 document.addEventListener('DOMContentLoaded', () => {
   fetch('/api/events.json')
@@ -68,5 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         eventsNode.appendChild(eventTemplate);
       });
+
+      const imgNode = document.querySelector('.walle__img');
+      const zoomNode = document.querySelector('.walle__value--zoom');
+      const brightnessNode = document.querySelector('.walle__value--brightness');
+      const touch = new Touch(imgNode, zoomNode, brightnessNode);
     });
 });
