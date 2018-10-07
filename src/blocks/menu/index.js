@@ -1,7 +1,7 @@
 import './style.scss';
 
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('/api/menu.json')
+  fetch('api/menu.json')
     .then(response => response.json())
     .then(json => {
       const menuListHeaderNode = document.querySelector('.js-menu__list--header');
