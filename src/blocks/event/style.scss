@@ -48,8 +48,8 @@
 
     @media #{$tablet} {
       &--s {
+        grid-column: 1/2;
       }
-      grid-column: 1/2;
 
       &--m {
         grid-column-start: 1;
