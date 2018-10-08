@@ -285,11 +285,6 @@
     padding: 25px 18px 20px 18px;
     border-radius: 20px;
     margin-top: -25px;
-
-    @media #{$tablet} {
-      grid-column: span 10;
-      justify-self: left;
-    }
   }
 
   &__description {
