@@ -5,10 +5,12 @@
   margin-bottom: 15px;
   border-radius: 20px;
   position: relative;
+  background: #FAFAFA;
 
   @media #{$desktop--only} {
     &:hover {
       box-shadow: 0 2px 6px 0 rgba(197, 186, 186, 0.50);
+      background: #F3F3F3;
 
       & .event__info {
         background: #F3F3F3;
