@@ -337,7 +337,12 @@
     grid-template-columns: minmax(100px, 132px) minmax(100px, 132px);
     grid-template-rows: 1fr;
     justify-content: space-between;
-    grid-column-gap: 10px;
+    grid-column-gap: 15px;
+
+    @media #{$desktop} {
+      justify-content: start;
+      font-size: rem(16px);
+    }
   }
 
   &__walle {
