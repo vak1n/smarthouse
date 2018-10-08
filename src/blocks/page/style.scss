@@ -15,6 +15,14 @@
   &__header {
     grid-area: header;
     padding: 0 20px;
+    background: #ffffff;
+    z-index: 1;
+
+    @media #{$mobile--only} {
+      width: calc(100vw - 40px);
+      position: fixed;
+      z-index: 10;
+    }
 
     @media #{$desktop} {
       border-bottom: 1px solid #F0F0F0;
@@ -24,6 +32,14 @@
   &__content {
     grid-area: content;
     padding: 0 20px;
+
+    @media #{$mobile} {
+      margin: 70px auto 0 auto;
+    }
+
+    @media #{$tablet} {
+      margin: 0 auto;
+    }
 
     @media #{$desktop} {
       max-width: 1024px;

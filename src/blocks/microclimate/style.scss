@@ -19,12 +19,20 @@
     font-family: $font__main;
     font-size: rem(14px);
     color: #000000;
+
+    @media #{$tablet--only} {
+      font-size: rem(12px);
+    }
   }
 
   &__value {
     font-family: $font__main--bold;
     font-size: rem(14px);
     color: #000000;
+    
+    @media #{$tablet--only} {
+      font-size: rem(12px);
+    }
 
     &--temperature::after {
       content: 'C';

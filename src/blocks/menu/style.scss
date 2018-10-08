@@ -6,6 +6,7 @@
     background: url("../../../assets/icon_list_m.png") no-repeat;
     height: 14px;
     width: 16px;
+    position: relative;
     z-index: 2;
     
     @media #{$tablet} {
