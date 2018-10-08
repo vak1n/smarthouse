@@ -22,6 +22,6 @@ $tablet: "(min-width: #{$screen__tablet})";
 $tablet--big: "(min-width: #{$screen__tablet--big})";
 $desktop: "(min-width: #{$screen__tablet})";
 
-$mobile__big--only: "(min-width: #{$screen__mobile}) and (max-width: #{$screen__mobile--big})";
+$mobile--only: "(min-width: #{$screen__mobile}) and (max-width: #{$screen__mobile--big})";
 $tablet--only: "(min-width: #{$screen__tablet}) and (max-width: #{$screen__tablet--big})";
 $desktop--only: "(min-width: #{$screen__desktop})";
