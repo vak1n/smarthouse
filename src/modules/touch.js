@@ -5,16 +5,14 @@ export default class Touch {
    * @param {Element} brightnessNode
    */
   constructor(imgNode, zoomNode, brightnessNode) {
-    this.state = [];
-    this.diff = -1;
+    this.state = {};
     this.imgNode = imgNode;
     this.zoomNode = zoomNode;
+    this.brightnessNode = brightnessNode;
     this.zoom = 1;
     this.deltaX = 0;
     this.deltaY = 0;
     this.brightness = 100;
-    this.prevEvent = undefined;
-    this.prevAngle = undefined;
 
     imgNode.onpointerdown = this.downHandler.bind(this);
     imgNode.onpointermove = this.moveHandler.bind(this);
@@ -29,48 +27,40 @@ export default class Touch {
    */
   downHandler(event) {
     this.imgNode.setPointerCapture(event.pointerId);
-    this.state.push(event);
-    this.prevEvent = event;
+    this.state[event.pointerId] = [event];
   }
 
   /**
    * @param {Event} event
    */
   moveHandler(event) {
-    for (let i = 0; i < this.state.length; i += 1) {
-      if (event.pointerId === this.state[i].pointerId) {
-        this.state[i] = event;
+    const eventPrev = this.state[event.pointerId][this.state[event.pointerId].length - 1];
+    const point = {
+      x: event.x,
+      y: event.y,
+    };
+    const pointPrev = {
+      x: eventPrev.x,
+      y: eventPrev.y,
+    };
+    const deltaX = point.x - pointPrev.x;
+    const deltaY = point.y - pointPrev.y;
+
+    switch (Object.keys(this.state).length) {
+      case 1:
+        this.deltaX += deltaX;
+        this.deltaY += deltaY;
         break;
-      }
-    }
-
-    if (this.state.length === 1) {
-      const thresholdDistance = 10;
-      const deltaX = event.x - this.prevEvent.x;
-      const deltaY = event.y - this.prevEvent.y;
-      if (deltaX > thresholdDistance && Math.abs(deltaY) < thresholdDistance) {
-        this.deltaX += deltaX;
-      } else if (-deltaX > thresholdDistance && Math.abs(deltaY) < thresholdDistance) {
-        this.deltaX += deltaX;
-      } else if (deltaY > thresholdDistance && Math.abs(deltaX) < thresholdDistance) {
-        this.deltaY += deltaY;
-      } else if (-deltaY > thresholdDistance && Math.abs(deltaX) < thresholdDistance) {
-        this.deltaY += deltaY;
-      }
-    }
-
-    if (this.state.length === 2) {
-      const diff = Math.abs(this.state[0].clientX - this.state[1].clientX);
-
-      if (this.diff > 0) {
-        if (diff > this.diff && this.zoom <= 100) {
+      case 2:
+        if (deltaX > 0 && this.zoom <= 100) {
           this.zoom += 1;
         }
-        if (diff < this.diff && this.zoom > 1) {
+        if (deltaX < 0 && this.zoom > 1) {
           this.zoom -= 1;
         }
-      }
-      this.diff = diff;
+        break;
+      default:
+        return;
     }
 
     this.imgNode.style.transform = `
@@ -78,27 +68,15 @@ export default class Touch {
       translateX(${Math.round(this.deltaX / 10)}px) 
       translateY(${Math.round(this.deltaY / 10)}px)`;
     this.zoomNode.textContent = this.zoom - 1;
+
+    this.state[event.pointerId].shift();
+    this.state[event.pointerId].push(event);
   }
 
   /**
    * @param {Event} event
    */
   upHandler(event) {
-    this.remove(event);
-    if (this.state.length < 2) {
-      this.diff = -1;
-    }
-  }
-
-  /**
-   * @param {Event} event
-   */
-  remove(event) {
-    for (let i = 0; i < this.state.length; i += 1) {
-      if (this.state[i].pointerId === event.pointerId) {
-        this.state.splice(i, 1);
-        break;
-      }
-    }
+    delete this.state[event.pointerId];
   }
 }
