@@ -5,10 +5,12 @@
   margin-bottom: 15px;
   border-radius: 20px;
   position: relative;
+  background: #FAFAFA;
 
   @media #{$desktop--only} {
     &:hover {
       box-shadow: 0 2px 6px 0 rgba(197, 186, 186, 0.50);
+      background: #F3F3F3;
 
       & .event__info {
         background: #F3F3F3;
@@ -48,8 +50,8 @@
 
     @media #{$tablet} {
       &--s {
+        grid-column: 1/2;
       }
-      grid-column: 1/2;
 
       &--m {
         grid-column-start: 1;
@@ -337,7 +339,12 @@
     grid-template-columns: minmax(100px, 132px) minmax(100px, 132px);
     grid-template-rows: 1fr;
     justify-content: space-between;
-    grid-column-gap: 10px;
+    grid-column-gap: 15px;
+
+    @media #{$desktop} {
+      justify-content: start;
+      font-size: rem(16px);
+    }
   }
 
   &__walle {

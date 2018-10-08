@@ -37,9 +37,9 @@
     grid-row-start: 2;
 
     $thumb-color: #D8D8D8 !default;
-    $thumb-radius: 4.5px !default;
+    $thumb-radius: 5px !default;
     $thumb-height: 20px !default;
-    $thumb-width: 6px !default;
+    $thumb-width: 12px !default;
     $thumb-shadow-size: 0 !default;
     $thumb-shadow-blur: 0 !default;
     $thumb-shadow-color: rgba(0, 0, 0, .2) !default;
@@ -86,7 +86,7 @@
 
     -webkit-appearance: none;
     background: transparent;
-    margin: $thumb-height / 2 0;
+    //margin: $thumb-height / 2 0;
     width: $track-width;
 
     &::-moz-focus-outer {
@@ -133,7 +133,7 @@
     }
 
     &::-moz-range-thumb {
-      @include thumb(-4);
+      @include thumb;
     }
 
     &::-ms-track {
@@ -159,7 +159,7 @@
     }
 
     &::-ms-thumb {
-      @include thumb(-4);
+      @include thumb;
       margin-top: $track-height / 4;
     }
 
@@ -317,7 +317,7 @@
     }
 
     &::-moz-range-thumb {
-      @include thumb(-4);
+      @include thumb;
     }
 
     &::-ms-track {
