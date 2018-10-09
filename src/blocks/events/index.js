@@ -64,9 +64,28 @@ document.addEventListener('DOMContentLoaded', () => {
           eventDataTemplate.querySelector('.event__description').classList.add(`event__description--${event.size}`);
           eventDataTemplate.querySelector('.event__description').textContent = event.description;
           eventTemplate.querySelector('.event').appendChild(eventDataTemplate);
+        } else {
+          const eventControlsTemplate = eventsNode.querySelector('#eventControls').content.cloneNode(true);
+          eventTemplate.querySelector('.event').appendChild(eventControlsTemplate);
+          eventTemplate.querySelector('.event').classList.add('event--control');
         }
 
         eventsNode.appendChild(eventTemplate);
       });
+    })
+    .then(() => {
+      const events = document.querySelectorAll('.event');
+      for (let i = 0; i < events.length; i += 1) {
+        events[i].addEventListener('mouseover', function (event) {
+          event.stopPropagation();
+          const eventNode = this.querySelector('.event__controls');
+          eventNode.style.visibility = 'visible';
+        });
+        events[i].addEventListener('mouseout', function (event) {
+          event.stopPropagation();
+          const eventNode = this.querySelector('.event__controls');
+          eventNode.style.visibility = 'hidden';
+        });
+      }
     });
 });
