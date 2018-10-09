@@ -13,6 +13,10 @@
   &__humidity {
     grid-column-start: 2;
     justify-self: right;
+
+    @media #{$desktop} {
+      justify-self: left;
+    }
   }
 
   &__value-name {
@@ -29,7 +33,7 @@
     font-family: $font__main--bold;
     font-size: rem(14px);
     color: #000000;
-    
+
     @media #{$tablet--only} {
       font-size: rem(12px);
     }
