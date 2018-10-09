@@ -73,7 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         eventsNode.appendChild(eventTemplate);
       });
-
+    })
+    .then(() => {
       if ('ontouchstart' in document.documentElement) {
         const imgNode = document.querySelector('.walle__img');
         const zoomNode = document.querySelector('.walle__value--zoom');
@@ -87,12 +88,16 @@ document.addEventListener('DOMContentLoaded', () => {
         events[i].addEventListener('mouseover', function (event) {
           event.stopPropagation();
           const eventNode = this.querySelector('.event__controls');
-          eventNode.style.visibility = 'visible';
+          if (eventNode !== null) {
+            eventNode.style.visibility = 'visible';
+          }
         });
         events[i].addEventListener('mouseout', function (event) {
           event.stopPropagation();
           const eventNode = this.querySelector('.event__controls');
-          eventNode.style.visibility = 'hidden';
+          if (eventNode !== null) {
+            eventNode.style.visibility = 'hidden';
+          }
         });
       }
     });
