@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Smart House</title>
+    <title>Яндекс Дом</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="noindex">
@@ -41,18 +41,21 @@
             <h1 class="events__title">Лента событий</h1>
             <template id="event">
                 <div class="events__event event">
-                    <div class="event__control"></div>
                     <div class="event__info">
-                        <div class="event__icon"></div>
-                        <div class="event__title"></div>
-                        <div class="event__name"></div>
-                        <div class="event__date"></div>
+                        <div class="event__info-wrapper">
+                            <div class="event__icon"></div>
+                            <div class="event__title"></div>
+                            <div class="event__name"></div>
+                            <div class="event__date"></div>
+                        </div>
                     </div>
                 </div>
             </template>
             <template id="eventData">
-                <div class="event__data">
-                    <div class="event__description"></div>
+                <div class="event__data-container">
+                    <div class="event__data">
+                        <div class="event__description"></div>
+                    </div>
                 </div>
             </template>
             <template id="eventGraph">
@@ -99,8 +102,10 @@
             </template>
             <template id="eventButtons">
                 <div class="event__buttons">
-                    <button class="button button--yellow button--col1">Да</button>
-                    <button class="button button--grey button--col2">Нет</button>
+                    <div class="event__buttons-wrapper">
+                        <button class="button button--yellow button--col1">Да</button>
+                        <button class="button button--grey button--col2">Нет</button>
+                    </div>
                 </div>
             </template>
             <template id="eventWalle">
@@ -128,6 +133,16 @@
                                 <span class="walle__value walle__value--brightness">100</span>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </template>
+            <template id="eventControls">
+                <div class="event__controls">
+                    <div class="event__control">
+                        <button class="event__close"></button>
+                    </div>
+                    <div class="event__control">
+                        <a class="event__link" href="#"></a>
                     </div>
                 </div>
             </template>

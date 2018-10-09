@@ -20,7 +20,7 @@ $mobile: "(min-width: #{$screen__mobile})";
 $mobile--big: "(min-width: #{$screen__mobile--big})";
 $tablet: "(min-width: #{$screen__tablet})";
 $tablet--big: "(min-width: #{$screen__tablet--big})";
-$desktop: "(min-width: #{$screen__tablet})";
+$desktop: "(min-width: #{$screen__desktop})";
 
 $mobile--only: "(min-width: #{$screen__mobile}) and (max-width: #{$screen__mobile--big})";
 $tablet--only: "(min-width: #{$screen__tablet}) and (max-width: #{$screen__tablet--big})";
