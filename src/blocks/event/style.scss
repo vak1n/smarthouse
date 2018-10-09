@@ -459,17 +459,17 @@
   &__buttons {
     margin-top: 20px;
 
-    @media #{$desktop} {
-      justify-content: start;
-      font-size: rem(16px);
-    }
-
     &-wrapper {
       display: grid;
       grid-template-columns: minmax(100px, 132px) minmax(100px, 132px);
       justify-content: space-between;
       grid-template-rows: 1fr;
       grid-column-gap: 15px;
+
+      @media #{$desktop} {
+        justify-content: start;
+        font-size: rem(16px);
+      }
     }
   }
 
