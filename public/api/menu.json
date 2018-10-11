@@ -2,7 +2,7 @@
   "links": [
     {
       "name": "События",
-      "href": "#",
+      "href": "/smarthouse/public/",
       "selected": true
     },
     {
@@ -23,6 +23,11 @@
     {
       "name": "Лицензия",
       "href": "https://wiki.yandex.ru/shri-2018-II/homework/Adaptivnaja-vjorstka/.files/license.pdf",
+      "selected": false
+    },
+    {
+      "name": "Видеонаблюдение",
+      "href": "video.html",
       "selected": false
     }
   ]

@@ -16,7 +16,6 @@
     grid-area: header;
     padding: 0 20px;
     background: #ffffff;
-    z-index: 1;
 
     @media #{$mobile--only} {
       width: calc(100vw - 40px);

@@ -9,13 +9,13 @@
 
   @media #{$mobile--big} {
     grid-template-columns: repeat(4, 1fr);
-    grid-auto-flow: row dense revert;
+    grid-auto-flow: row dense;
     grid-template-rows: auto;
   }
 
   @media #{$tablet} {
     grid-template-columns: repeat(6, 1fr);
-    grid-auto-flow: row dense revert;
+    grid-auto-flow: row dense;
     grid-template-rows: auto;
   }
 

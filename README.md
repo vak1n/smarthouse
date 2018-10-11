@@ -59,6 +59,10 @@ npm run build
 
 **[WIP]**
 
+### Третье задание «Мультимедиа»
+
+
+
 ### Четвертое задание «Node.js»
 
 Здесь https://github.com/vak1n/smarthouse-server
