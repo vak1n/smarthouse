@@ -2,7 +2,7 @@ import './style.scss';
 import Touch from '../../modules/touch';
 
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('api/events.json')
+  fetch('https://smarthouse-server.herokuapp.com/api/events/', { method: 'POST' })
     .then(response => response.json())
     .then(json => {
       const eventsNode = document.querySelector('.events');
