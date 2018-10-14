@@ -59,7 +59,7 @@ npm run build
 
 **[WIP]**
 
-### Четвертое задание «Работа с сенсорным пользовательским вводом»
+### Четвертое задание «Node.js»
 
 Здесь https://github.com/vak1n/smarthouse-server
 
