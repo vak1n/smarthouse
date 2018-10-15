@@ -3,7 +3,7 @@
 
 .videos {
   display: grid;
-  grid-template-columns: 280px;
+  grid-template-columns: auto;
   grid-auto-flow: row dense;
   grid-template-rows: auto;
   grid-column-gap: 20px;
@@ -13,20 +13,8 @@
   margin-bottom: 20px;
   transition: all 0.5s ease;
 
-  @media #{$mobile--big} {
-    grid-template-columns: 320px;
-  }
-
   @media #{$tablet} {
-    grid-template-columns: 340px 340px;
-  }
-
-  @media #{$tablet--big} {
-    grid-template-columns: 360px 360px;
-  }
-
-  @media #{$desktop} {
-    grid-template-columns: 400px 400px;
+    grid-template-columns: auto auto;
   }
 
   &__video {

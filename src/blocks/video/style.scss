@@ -4,38 +4,18 @@
 .video {
   display: grid;
   grid-template-columns: 30% 40% 30%;
-  grid-template-rows: 50px 1fr 50px;
+  grid-template-rows: auto 1fr auto;
   background: #000000;
   align-items: center;
   justify-items: center;
-  transition: all 0.5s ease;
-  width: 280px;
-  height: 280px;
+  transition: all 0.3s linear;
   cursor: pointer;
-
-  @media #{$mobile--big} {
-    width: 320px;
-    height: 320px;
-  }
-
-  @media #{$tablet} {
-    width: 340px;
-    height: 340px;
-  }
-
-  @media #{$tablet--big} {
-    width: 360px;
-    height: 360px;
-  }
-
-  @media #{$desktop} {
-    width: 400px;
-    height: 400px;
-  }
+  z-index: 0;
 
   &--fullscreen {
-    position: fixed;
     cursor: default;
+    position: relative;
+    z-index: 100;
   }
 
   &__video {
@@ -53,35 +33,46 @@
     visibility: hidden;
     grid-column-start: 3;
     grid-row-start: 1;
+    align-self: start;
     justify-self: right;
     color: #FFFFFF;
-    font-size: rem(14px);
-    margin-right: 20px;
+    font-size: 12px;
+    margin: 10px 10px 0 0;
     cursor: pointer;
+    z-index: 1;
   }
 
   &__range {
     visibility: hidden;
     grid-row-start: 3;
     align-self: end;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    z-index: 1;
 
     &--brightness {
       grid-column-start: 1;
       justify-self: left;
-      margin-left: 20px;
+      margin-left: 10px;
     }
 
     &--contrast {
       grid-column-start: 3;
       justify-self: right;
-      margin-right: 20px;
+      margin-right: 10px;
     }
+  }
+
+  &--fullscreen &__rollup {
+    visibility: visible;
+  }
+
+  &--fullscreen &__range {
+    visibility: visible;
   }
 
   &__range-label {
     color: #FFFFFF;
-    font-size: rem(14px);
+    font-size: 10px;
   }
 
   &__range-input {
@@ -89,18 +80,18 @@
     grid-row-start: 3;
 
     $thumb-color: #605757 !default;
-    $thumb-radius: 8px !default;
-    $thumb-height: 16px !default;
-    $thumb-width: 16px !default;
+    $thumb-radius: 4px !default;
+    $thumb-height: 8px !default;
+    $thumb-width: 8px !default;
     $thumb-shadow-size: 0 !default;
     $thumb-shadow-blur: 0 !default;
     $thumb-shadow-color: rgba(0, 0, 0, .2) !default;
-    $thumb-border-width: 2px !default;
+    $thumb-border-width: 1px !default;
     $thumb-border-color: #FFFFFF !default;
 
     $track-color: #FFFFFF !default;
     $track-width: 100% !default;
-    $track-height: 4px !default;
+    $track-height: 2px !default;
     $track-shadow-size: 0 !default;
     $track-shadow-blur: 0 !default;
     $track-shadow-color: rgba(0, 0, 0, .2) !default;
