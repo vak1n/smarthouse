@@ -37,7 +37,7 @@
     padding: 0 20px;
     margin: 0 auto;
 
-    @media #{$mobile--only} {
+    @media #{$mobile} {
       width: calc(100vw - 40px);
     }
 
