@@ -64,7 +64,7 @@
     font-size: 16px;
     font-family: $font__main;
     margin: 20px 20px 0 0;
-    padding: 5px;
+    padding: 10px;
     cursor: pointer;
     z-index: 1;
     background: #000000;
@@ -90,7 +90,7 @@
     align-self: end;
     color: #FFFFFF;
     margin-bottom: 20px;
-    padding: 5px;
+    padding: 10px;
     z-index: 1;
     background: #000000;
     opacity: 0.4;
@@ -168,19 +168,19 @@
     grid-column-start: 3;
     grid-row-start: 3;
 
-    $thumb-color: #605757 !default;
+    $thumb-color: #FFFFFF !default;
     $thumb-radius: 8px !default;
     $thumb-height: 16px !default;
     $thumb-width: 16px !default;
     $thumb-shadow-size: 0 !default;
     $thumb-shadow-blur: 0 !default;
     $thumb-shadow-color: rgba(0, 0, 0, .2) !default;
-    $thumb-border-width: 2px !default;
-    $thumb-border-color: #FFFFFF !default;
+    $thumb-border-width: 0 !default;
+    $thumb-border-color: #eceff1 !default;
 
     $track-color: #FFFFFF !default;
     $track-width: 100% !default;
-    $track-height: 4px !default;
+    $track-height: 2px !default;
     $track-shadow-size: 0 !default;
     $track-shadow-blur: 0 !default;
     $track-shadow-color: rgba(0, 0, 0, .2) !default;
@@ -218,7 +218,7 @@
 
     -webkit-appearance: none;
     background: transparent;
-    margin: $thumb-height / 2 0;
+    margin: 0;
     width: $track-width;
 
     &::-moz-focus-outer {
@@ -247,6 +247,7 @@
       background: $track-color;
       border: $track-border-width solid $track-border-color;
       border-radius: $track-radius;
+      margin: $thumb-height 0;
     }
 
     &::-webkit-slider-thumb {
