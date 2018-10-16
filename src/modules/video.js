@@ -35,6 +35,13 @@ export default class Video {
     this.contrastNode.addEventListener('input', ev => {
       this.changeQuality(ev);
     });
+
+    window.addEventListener('resize', () => {
+      if (!this.isFullScreen() || !this.issetFullScreen()) {
+        return;
+      }
+      this.resizeVideo();
+    });
   }
 
   fullScreen(ev) {
@@ -44,6 +51,17 @@ export default class Video {
     }
     document.body.style.overflow = 'hidden';
     this.videoContainerNode.classList.add(`${this.videoContainerClass}--fullscreen`);
+    this.resizeVideo();
+    this.videoNode.muted = false;
+    setTimeout(() => {
+      this.curtain.style.display = 'block';
+      this.curtain.style.opacity = 1;
+      this.videoContainerNode.classList.add(`${this.videoContainerClass}--show-control`);
+      this.audioAnalyser.on();
+    }, 300);
+  }
+
+  resizeVideo() {
     const bounding = this.videoContainerNode.getBoundingClientRect();
     const sX = document.documentElement.clientWidth / this.videoContainerNode.clientWidth;
     const sY = document.documentElement.clientHeight / this.videoContainerNode.clientHeight;
@@ -60,13 +78,6 @@ export default class Video {
       translateX(${tX}px)
       translateY(${tY}px)
       scale(${s})`;
-    this.videoNode.muted = false;
-    setTimeout(() => {
-      this.curtain.style.display = 'block';
-      this.curtain.style.opacity = 1;
-      this.videoContainerNode.classList.add(`${this.videoContainerClass}--show-control`);
-      this.audioAnalyser.on();
-    }, 300);
   }
 
   rollup(ev) {
@@ -92,7 +103,7 @@ export default class Video {
     return document.querySelectorAll(`.${this.videoContainerClass}--fullscreen`).length > 0;
   }
 
-  changeQuality(ev) {
+  changeQuality() {
     const filter = `brightness(${this.brightnessNode.value / 100}) contrast(${this.contrastNode.value / 100})`;
     this.videoNode.style.filter = filter;
   }
