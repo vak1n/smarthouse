@@ -56,15 +56,15 @@ export default class Video {
     if (document.documentElement.clientHeight > tY) {
       tY += (document.documentElement.clientHeight - this.videoContainerNode.clientHeight * s) / 2;
     }
-    this.videoContainerNode.style.transform = `
+    this.videoNode.style.transform = `
       translateX(${tX}px)
       translateY(${tY}px)
       scale(${s})`;
     this.videoNode.muted = false;
     setTimeout(() => {
-      const curtain = document.querySelector('.page__curtain');
-      curtain.style.display = 'block';
-      curtain.style.opacity = 1;
+      this.curtain.style.display = 'block';
+      this.curtain.style.opacity = 1;
+      this.videoContainerNode.classList.add(`${this.videoContainerClass}--show-control`);
       this.audioAnalyser.on();
     }, 300);
   }
@@ -76,8 +76,9 @@ export default class Video {
     }
     this.audioAnalyser.off();
     this.videoNode.muted = true;
-    this.videoContainerNode.style.transform = '';
+    this.videoNode.style.transform = '';
     this.videoContainerNode.classList.remove(`${this.videoContainerClass}--fullscreen`);
+    this.videoContainerNode.classList.remove(`${this.videoContainerClass}--show-control`);
     this.curtain.style.display = 'none';
     this.curtain.style.opacity = 0;
     document.body.style.overflow = '';

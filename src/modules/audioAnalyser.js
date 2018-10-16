@@ -44,8 +44,8 @@ export default class AudioAnalyser {
     let barHeight;
     let x = 0;
     for (let i = 0; i < this.analyser.frequencyBinCount; i += 1) {
-      barHeight = this.data[i] / 5;
-      barHeight = barHeight < this.analyserNode.clientHeight ? barHeight : this.analyserNode.clientHeight;
+      barHeight = (this.data[i] / this.analyserNode.clientHeight) * 25;
+      barHeight = barHeight > this.analyserNode.clientHeight ? this.analyserNode.clientHeight : barHeight;
       analyserContext.fillStyle = 'rgb(255, 255, 255)';
       analyserContext.fillRect(x, 0, barWidth, barHeight);
       x += barWidth;
