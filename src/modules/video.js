@@ -1,3 +1,5 @@
+import AudioAnalyser from './audioAnalyser';
+
 export default class Video {
   /**
    * @param {Element} videoContainerNode
@@ -7,6 +9,7 @@ export default class Video {
     this.videoContainerNode = videoContainerNode;
     this.videoContainerClass = videoContainerNode.className;
     this.videoNode = this.videoContainerNode.querySelector(`.${this.videoContainerClass}__video`);
+    this.analyserNode = this.videoContainerNode.querySelector(`.${this.videoContainerClass}__analyser`);
     this.rollupNode = this.videoContainerNode.querySelector(`.${this.videoContainerClass}__rollup`);
     this.brightnessContainerNode = this.videoContainerNode.querySelector(
       `.${this.videoContainerClass}__range--brightness`,
@@ -15,6 +18,8 @@ export default class Video {
     this.brightnessNode = this.brightnessContainerNode.querySelector(`.${this.videoContainerClass}__range-input`);
     this.contrastNode = this.contrastContainerNode.querySelector(`.${this.videoContainerClass}__range-input`);
     this.curtain = document.querySelector('.page__curtain');
+
+    this.audioAnalyser = new AudioAnalyser(this.videoNode, this.analyserNode);
   }
 
   init() {
@@ -55,12 +60,13 @@ export default class Video {
       translateX(${tX}px)
       translateY(${tY}px)
       scale(${s})`;
+    this.videoNode.muted = false;
     setTimeout(() => {
       const curtain = document.querySelector('.page__curtain');
       curtain.style.display = 'block';
       curtain.style.opacity = 1;
+      this.audioAnalyser.on();
     }, 300);
-    this.videoNode.muted = false;
   }
 
   rollup(ev) {
@@ -68,6 +74,7 @@ export default class Video {
     if (!this.isFullScreen()) {
       return;
     }
+    this.audioAnalyser.off();
     this.videoNode.muted = true;
     this.videoContainerNode.style.transform = '';
     this.videoContainerNode.classList.remove(`${this.videoContainerClass}--fullscreen`);
