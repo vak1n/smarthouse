@@ -1,4 +1,5 @@
 import AudioAnalyser from './audioAnalyser';
+import Illumination from './illumination';
 
 export default class Video {
   /**
@@ -10,16 +11,19 @@ export default class Video {
     this.videoContainerClass = videoContainerNode.className;
     this.videoNode = this.videoContainerNode.querySelector(`.${this.videoContainerClass}__video`);
     this.analyserNode = this.videoContainerNode.querySelector(`.${this.videoContainerClass}__analyser`);
+    this.canvasNode = this.videoContainerNode.querySelector(`.${this.videoContainerClass}__canvas`);
     this.rollupNode = this.videoContainerNode.querySelector(`.${this.videoContainerClass}__rollup`);
     this.brightnessContainerNode = this.videoContainerNode.querySelector(
       `.${this.videoContainerClass}__range--brightness`,
     );
+    this.illuminationValueNode = this.videoContainerNode.querySelector(`.${this.videoContainerClass}__value--illumination`);
     this.contrastContainerNode = this.videoContainerNode.querySelector(`.${this.videoContainerClass}__range--contrast`);
     this.brightnessNode = this.brightnessContainerNode.querySelector(`.${this.videoContainerClass}__range-input`);
     this.contrastNode = this.contrastContainerNode.querySelector(`.${this.videoContainerClass}__range-input`);
     this.curtain = document.querySelector('.page__curtain');
 
     this.audioAnalyser = new AudioAnalyser(this.videoNode, this.analyserNode);
+    this.illumination = new Illumination(this.videoNode, this.canvasNode, this.illuminationValueNode);
   }
 
   init() {
@@ -58,6 +62,7 @@ export default class Video {
       this.curtain.style.opacity = 1;
       this.videoContainerNode.classList.add(`${this.videoContainerClass}--show-control`);
       this.audioAnalyser.on();
+      this.illumination.on();
     }, 300);
   }
 
@@ -85,6 +90,7 @@ export default class Video {
     if (!this.isFullScreen()) {
       return;
     }
+    this.illumination.off();
     this.audioAnalyser.off();
     this.videoNode.muted = true;
     this.videoNode.style.transform = '';

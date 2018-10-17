@@ -27,15 +27,87 @@
   &__canvas {
     grid-column: 1/4;
     grid-row: 1/4;
+    display: none;
+  }
+
+  &__illumination {
+    display: none;
+    grid-column-start: 2;
+    grid-row-start: 3;
+    align-self: end;
+    justify-self: center;
+    margin: 0 20px 100px 20px;
+    padding: 10px;
+    border-radius: 10px;
+    background: #000000;
+    z-index: 1;
+    opacity: 0.4;
+
+    @media #{$mobile--big} {
+      margin: 0 20px 40px 20px;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &--show-control &__illumination {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: calc(50% - 85px);
+
+    @media #{$tablet} {
+      left: calc(50% - 95px);
+    }
+
+    @media #{$desktop} {
+      left: calc(50% - 105px);
+    }
+  }
+
+  &__label {
+    color: #FFFFFF;
+    font-family: $font__main;
+    font-size: 14px;
+
+    @media #{$tablet} {
+      font-size: 18px;
+    }
+
+    @media #{$desktop} {
+      font-size: 22px;
+    }
+  }
+
+  &__value {
+    color: #FFFFFF;
+    font-family: $font__main;
+    font-size: 14px;
+
+    @media #{$tablet} {
+      font-size: 18px;
+    }
+
+    @media #{$desktop} {
+      font-size: 22px;
+    }
+
+    &--illumination {
+      &:after {
+        content: '%';
+      }
+    }
   }
 
   &__analyser {
-    visibility: hidden;
+    display: none;
     grid-column-start: 1;
     grid-row-start: 1;
     height: 75px;
     width: 150px;
-    margin: 30px 0 0 20px;
+    margin: 20px 0 0 20px;
     z-index: 1;
     opacity: 0.4;
 
@@ -54,8 +126,15 @@
     }
   }
 
+  &--show-control &__analyser {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
   &__rollup {
-    visibility: hidden;
+    display: none;
     grid-column-start: 3;
     grid-row-start: 1;
     align-self: start;
@@ -84,8 +163,15 @@
     }
   }
 
+  &--show-control &__rollup {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+  }
+
   &__range {
-    visibility: hidden;
+    display: none;
     grid-row-start: 3;
     align-self: end;
     color: #FFFFFF;
@@ -122,15 +208,8 @@
     }
   }
 
-  &--show-control &__rollup {
-    visibility: visible;
-    position: fixed;
-    top: 0;
-    right: 0;
-  }
-
   &--show-control &__range {
-    visibility: visible;
+    display: block;
     position: fixed;
     bottom: 0;
 
@@ -141,13 +220,6 @@
     &--contrast {
       right: 0;
     }
-  }
-
-  &--show-control &__analyser {
-    visibility: visible;
-    position: fixed;
-    top: 0;
-    left: 0;
   }
 
   &__range-label {
@@ -198,7 +270,6 @@
     @mixin track {
       cursor: pointer;
       height: $track-height;
-      transition: all .2s ease;
       width: $track-width;
     }
 
