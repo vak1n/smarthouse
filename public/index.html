@@ -111,8 +111,8 @@
             <template id="eventWalle">
                 <div class="event__walle">
                     <div class="walle">
-                        <div class="walle__img-contianer">
-                            <img class="walle__img"
+                        <div class="walle__img-contianer" touch-action="none">
+                            <img class="walle__img" touch-action="none"
                                 sizes="(max-width: 2496px) 100vw, 2496px"
                                 srcset="
                                     assets/robot_em9jpf_c_scale,w_580.jpg 580w,
@@ -130,10 +130,12 @@
                             <div class="walle__zoom">
                                 <span class="walle__value-name">Приближение:</span>
                                 <span class="walle__value walle__value--zoom">0</span>
+                                <input class="walle__range walle__range--zoom" type="range" min="0" max="100" value="0">
                             </div>
                             <div class="walle__brightness">
                                 <span class="walle__value-name">Яркость:</span>
                                 <span class="walle__value walle__value--brightness">100</span>
+                                <input class="walle__range walle__range--brightness" type="range" min="0" max="200" value="100">
                             </div>
                         </div>
                     </div>
