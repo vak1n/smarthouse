@@ -94,9 +94,8 @@ export default class Video {
       tY += (document.documentElement.clientHeight - this.videoContainerNode.clientHeight * s) / 2;
     }
     this.videoNode.style.transform = `
-      translateX(${tX}px)
-      translateY(${tY}px)
-      scale(${s})`;
+      translate3d(${tX}px, ${tY}px, 0)
+      scale3d(${s}, ${s}, 1)`;
   }
 
   rollup(ev) {
