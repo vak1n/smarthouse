@@ -26,7 +26,21 @@ export default class Video {
     this.illumination = new Illumination(this.videoNode, this.canvasNode, this.illuminationValueNode);
   }
 
-  init() {
+  init(url) {
+    if (window.Hls.isSupported()) {
+      const hls = new window.Hls();
+      hls.loadSource(url);
+      hls.attachMedia(this.videoNode);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        this.videoNode.play();
+      });
+    } else if (this.videoNode.canPlayType('application/vnd.apple.mpegurl')) {
+      this.videoNode.src = 'https://videos-dev.github.io/streams/x36xhzz/x36xhzz.m3u8';
+      this.videoNode.addEventListener('loadedmetadata', () => {
+        this.videoNode.play();
+      });
+    }
+
     this.videoContainerNode.addEventListener('click', ev => {
       this.fullScreen(ev);
     });

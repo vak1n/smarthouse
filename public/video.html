@@ -39,86 +39,28 @@
     <div class="page__content">
         <h1 class="page__title">Видеонаблюдение</h1>
         <div class="videos">
-            <div class="videos__video">
-                <div class="video">
-                    <canvas class="video__analyser"></canvas>
-                    <span class="video__rollup">Все камеры</span>
-                    <video id="video-1" class="video__video" muted></video>
-                    <canvas id="canvas-1" class="video__canvas"></canvas>
-                    <div class="video__range video__range--brightness">
-                        <label class="video__range-label">Яркость</label>
-                        <input class="video__range-input" type="range" min="0" max="200" value="100">
-                    </div>
-                    <div class="video__illumination">
-                        <span class="video__label">Освещение:</span>
-                        <span class="video__value video__value--illumination">0</span>
-                    </div>
-                    <div class="video__range video__range--contrast">
-                        <label class="video__range-label">Контрастность</label>
-                        <input class="video__range-input" type="range" min="0" max="200" value="100">
-                    </div>
-                </div>
-            </div>
-            <div class="videos__video">
-                <div class="video">
-                    <canvas class="video__analyser"></canvas>
-                    <span class="video__rollup">Все камеры</span>
-                    <video id="video-2" class="video__video" muted></video>
-                    <canvas id="canvas-2" class="video__canvas"></canvas>
-                    <div class="video__range video__range--brightness">
-                        <label class="video__range-label">Яркость</label>
-                        <input class="video__range-input" type="range" min="0" max="200" value="100">
-                    </div>
-                    <div class="video__illumination">
-                        <span class="video__label">Освещение:</span>
-                        <span class="video__value video__value--illumination">0</span>
-                    </div>
-                    <div class="video__range video__range--contrast">
-                        <label class="video__range-label">Контрастность</label>
-                        <input class="video__range-input" type="range" min="0" max="200" value="100">
+            <template id="video">
+                <div class="videos__video">
+                    <div class="video">
+                        <canvas class="video__analyser"></canvas>
+                        <span class="video__rollup">Все камеры</span>
+                        <video class="video__video" muted></video>
+                        <canvas class="video__canvas"></canvas>
+                        <div class="video__range video__range--brightness">
+                            <label class="video__range-label">Яркость</label>
+                            <input class="video__range-input" type="range" min="0" max="200" value="100">
+                        </div>
+                        <div class="video__illumination">
+                            <span class="video__label">Освещение:</span>
+                            <span class="video__value video__value--illumination">0</span>
+                        </div>
+                        <div class="video__range video__range--contrast">
+                            <label class="video__range-label">Контрастность</label>
+                            <input class="video__range-input" type="range" min="0" max="200" value="100">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="videos__video">
-                <div class="video">
-                    <canvas class="video__analyser"></canvas>
-                    <span class="video__rollup">Все камеры</span>
-                    <video id="video-3" class="video__video" muted></video>
-                    <canvas id="canvas-3" class="video__canvas"></canvas>
-                    <div class="video__range video__range--brightness">
-                        <label class="video__range-label">Яркость</label>
-                        <input class="video__range-input" type="range" min="0" max="200" value="100">
-                    </div>
-                    <div class="video__illumination">
-                        <span class="video__label">Освещение:</span>
-                        <span class="video__value video__value--illumination">0</span>
-                    </div>
-                    <div class="video__range video__range--contrast">
-                        <label class="video__range-label">Контрастность</label>
-                        <input class="video__range-input" type="range" min="0" max="200" value="100">
-                    </div>
-                </div>
-            </div>
-            <div class="videos__video">
-                <div class="video">
-                    <canvas class="video__analyser"></canvas>
-                    <span href="#" class="video__rollup">Все камеры</span>
-                    <video id="video-4" class="video__video" muted></video>
-                    <canvas id="canvas-4" class="video__canvas"></canvas>
-                    <div class="video__range video__range--brightness">
-                        <label class="video__range-label">Яркость</label>
-                        <input class="video__range-input" type="range" min="0" max="200" value="100">
-                    </div>
-                    <div class="video__illumination">
-                        <span class="video__label">Освещение:</span>
-                        <span class="video__value video__value--illumination">0</span>
-                    </div>
-                    <div class="video__range video__range--contrast">
-                        <label class="video__range-label">Контрастность</label>
-                        <input class="video__range-input" type="range" min="0" max="200" value="100">
-                    </div>
-                </div>
-            </div>
+            </template>
         </div>
     </div>
     <div class="page__footer">
