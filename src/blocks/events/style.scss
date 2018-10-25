@@ -9,34 +9,14 @@
 
   @media #{$mobile--big} {
     grid-template-columns: repeat(4, 1fr);
-    grid-auto-flow: row dense revert;
+    grid-auto-flow: row dense;
     grid-template-rows: auto;
   }
 
   @media #{$tablet} {
     grid-template-columns: repeat(6, 1fr);
-    grid-auto-flow: row dense revert;
+    grid-auto-flow: row dense;
     grid-template-rows: auto;
-  }
-
-  &__title {
-    font-family: $font__main--bold;
-    font-size: rem(24px);
-    color: $color__text;
-    margin: 0;
-
-    @media #{$mobile--big} {
-      grid-column: 1/5;
-    }
-
-    @media #{$tablet} {
-      margin: 0;
-      grid-column: 1/7;
-    }
-
-    @media #{$desktop} {
-      margin: 40px 0 20px 0;
-    }
   }
 
   &__event {

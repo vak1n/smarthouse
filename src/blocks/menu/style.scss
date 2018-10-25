@@ -8,7 +8,7 @@
     width: 16px;
     position: relative;
     z-index: 2;
-    
+
     @media #{$tablet} {
       display: none;
     }
@@ -55,7 +55,12 @@
   &__item {
     @media #{$tablet} {
       display: inline;
-      margin-right:  20px;
+      margin-right:  5px;
+    }
+
+    @media #{$desktop} {
+      display: inline;
+      margin-right:  15px;
     }
 
     &--inline {

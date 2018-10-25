@@ -1,9 +1,13 @@
 const PUBLIC_PATH = require('path').join(__dirname, 'public');
 
 module.exports = {
+  entry: {
+    index: './src/index.js',
+    video: './src/video.js',
+  },
   output: {
     path: PUBLIC_PATH,
-    filename: 'index.js',
+    filename: '[name].js',
   },
   devServer: {
     contentBase: PUBLIC_PATH,

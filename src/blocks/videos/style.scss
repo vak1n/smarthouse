@@ -1,0 +1,23 @@
+@import "../../variables";
+@import "../../mixins/rem";
+
+.videos {
+  display: grid;
+  grid-template-columns: auto;
+  grid-auto-flow: row dense;
+  grid-template-rows: auto;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+
+  @media #{$tablet} {
+    grid-template-columns: 48% 48%;
+  }
+
+  &__video {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}

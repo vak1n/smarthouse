@@ -23,7 +23,7 @@
     "webpack-dev-server": "^3.1.4"
   },
   "scripts": {
-    "start": "webpack --mode production",
+    "start": "webpack-dev-server --mode production",
     "build": "webpack --mode production",
     "dev": "webpack-dev-server --mode development --open",
     "format": "eslint --fix src",
