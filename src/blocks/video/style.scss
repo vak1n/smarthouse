@@ -21,7 +21,7 @@
     grid-column: 1/4;
     grid-row: 1/4;
     width: 100%;
-    transition: all 0.3s linear;
+    transition: transform 0.3s linear;
   }
 
   &__canvas {
