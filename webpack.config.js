@@ -10,6 +10,7 @@ module.exports = {
     filename: '[name].js',
   },
   devServer: {
+    disableHostCheck: true,
     contentBase: PUBLIC_PATH,
     compress: true,
     port: 9000,

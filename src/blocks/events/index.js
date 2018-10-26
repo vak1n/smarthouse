@@ -75,12 +75,11 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     })
     .then(() => {
-      if ('ontouchstart' in document.documentElement) {
-        const imgNode = document.querySelector('.walle__img');
-        const zoomNode = document.querySelector('.walle__value--zoom');
-        const brightnessNode = document.querySelector('.walle__value--brightness');
-        const touch = new Touch(imgNode, zoomNode, brightnessNode);
-      }
+      const imgNode = document.querySelector('.walle__img');
+      const zoomNode = document.querySelector('.walle__range--zoom');
+      const brightnessNode = document.querySelector('.walle__range--brightness');
+      const touch = new Touch(imgNode, zoomNode, brightnessNode);
+      touch.init();
     })
     .then(() => {
       const events = document.querySelectorAll('.event');

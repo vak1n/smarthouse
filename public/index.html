@@ -111,43 +111,31 @@
             <template id="eventWalle">
                 <div class="event__walle">
                     <div class="walle">
-                        <div class="walle__img-contianer">
-                            <img class="walle__img"
-                                 sizes="(max-width: 2496px) 100vw, 2496px"
-                                 srcset="
-                                    assets/robot_wswgna_c_scale,w_320.png 320w,
-                                    assets/robot_wswgna_c_scale,w_561.png 561w,
-                                    assets/robot_wswgna_c_scale,w_743.png 743w,
-                                    assets/robot_wswgna_c_scale,w_896.png 896w,
-                                    assets/robot_wswgna_c_scale,w_1037.png 1037w,
-                                    assets/robot_wswgna_c_scale,w_1166.png 1166w,
-                                    assets/robot_wswgna_c_scale,w_1285.png 1285w,
-                                    assets/robot_wswgna_c_scale,w_1401.png 1401w,
-                                    assets/robot_wswgna_c_scale,w_1518.png 1518w,
-                                    assets/robot_wswgna_c_scale,w_1626.png 1626w,
-                                    assets/robot_wswgna_c_scale,w_1727.png 1727w,
-                                    assets/robot_wswgna_c_scale,w_1819.png 1819w,
-                                    assets/robot_wswgna_c_scale,w_1916.png 1916w,
-                                    assets/robot_wswgna_c_scale,w_2016.png 2016w,
-                                    assets/robot_wswgna_c_scale,w_2107.png 2107w,
-                                    assets/robot_wswgna_c_scale,w_2193.png 2193w,
-                                    assets/robot_wswgna_c_scale,w_2283.png 2283w,
-                                    assets/robot_wswgna_c_scale,w_2380.png 2380w,
-                                    assets/robot_wswgna_c_scale,w_2471.png 2471w,
-                                    assets/robot_wswgna_c_scale,w_2496.png 2496w"
-                                 src="assets/robot_wswgna_c_scale,w_2496.png"
-                                 alt="walle"
-                                 title="walle"
+                        <div class="walle__img-contianer" touch-action="none">
+                            <img class="walle__img" touch-action="none"
+                                sizes="(max-width: 2496px) 100vw, 2496px"
+                                srcset="
+                                    assets/robot_em9jpf_c_scale,w_580.jpg 580w,
+                                    assets/robot_em9jpf_c_scale,w_1166.jpg 1166w,
+                                    assets/robot_em9jpf_c_scale,w_1577.jpg 1577w,
+                                    assets/robot_em9jpf_c_scale,w_1984.jpg 1984w,
+                                    assets/robot_em9jpf_c_scale,w_2358.jpg 2358w,
+                                    assets/robot_em9jpf_c_scale,w_2496.jpg 2496w"
+                                src="assets/robot_em9jpf_c_scale,w_2496.jpg"
+                                alt="walle"
+                                title="walle"
                             >
                         </div>
                         <div class="walle__control">
                             <div class="walle__zoom">
                                 <span class="walle__value-name">Приближение:</span>
                                 <span class="walle__value walle__value--zoom">0</span>
+                                <input class="walle__range walle__range--zoom" type="range" min="0" max="100" value="0">
                             </div>
                             <div class="walle__brightness">
                                 <span class="walle__value-name">Яркость:</span>
                                 <span class="walle__value walle__value--brightness">100</span>
+                                <input class="walle__range walle__range--brightness" type="range" min="0" max="200" value="100">
                             </div>
                         </div>
                     </div>
