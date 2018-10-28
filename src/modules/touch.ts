@@ -1,10 +1,18 @@
-export default class Touch {
-  /**
-   * @param {Element} imgNode
-   * @param {Element} zoomNode
-   * @param {Element} brightnessNode
-   */
-  constructor(imgNode, zoomNode, brightnessNode) {
+import TouchInterface from '../interfaces/touchInterface';
+
+export default class Touch implements TouchInterface {
+  state: {[key: string]: PointerEvent[]};
+  imgNode: HTMLImageElement;
+  zoomNode: HTMLInputElement;
+  brightnessNode: HTMLInputElement;
+  zoom: number;
+  deltaX: number;
+  deltaY: number;
+  brightness: number;
+  segment: number;
+  angle: number;
+
+  constructor(imgNode: HTMLImageElement, zoomNode: HTMLInputElement, brightnessNode: HTMLInputElement) {
     this.state = {};
     this.imgNode = imgNode;
     this.zoomNode = zoomNode;
@@ -17,7 +25,7 @@ export default class Touch {
     this.angle = 0;
   }
 
-  init() {
+  public init(): void {
     this.imgNode.addEventListener('pointerdown', ev => {
       this.downHandler(ev);
     });
@@ -38,22 +46,21 @@ export default class Touch {
     });
 
     this.zoomNode.addEventListener('input', ev => {
-      this.zoom = this.zoomNode.value;
+      this.zoom = Number(this.zoomNode.value);
       this.setStyle();
-      this.zoomNode.previousElementSibling.textContent = this.zoom;
+      const labelNode = this.zoomNode.previousElementSibling;
+      labelNode && (labelNode.textContent = String(this.zoom));
     });
 
     this.brightnessNode.addEventListener('input', ev => {
-      this.brightness = this.brightnessNode.value;
+      this.brightness = Number(this.brightnessNode.value);
       this.setStyle();
-      this.brightnessNode.previousElementSibling.textContent = this.brightness;
+      const labelNode = this.zoomNode.previousElementSibling;
+      labelNode && (labelNode.textContent = String(this.brightness));
     });
   }
 
-  /**
-   * @param {Event} ev
-   */
-  downHandler(ev) {
+  public downHandler(ev: PointerEvent): void {
     this.imgNode.setPointerCapture(ev.pointerId);
     this.state[ev.pointerId] = [ev];
     if (this.state[ev.pointerId - 1]) {
@@ -62,10 +69,7 @@ export default class Touch {
     }
   }
 
-  /**
-   * @param {Event} ev
-   */
-  moveHandler(ev) {
+  public moveHandler(ev: PointerEvent): void {
     switch (Object.keys(this.state).length) {
       case 1:
         // swipe
@@ -118,10 +122,12 @@ export default class Touch {
     }
 
     this.setStyle();
-    this.zoomNode.value = this.zoom;
-    this.zoomNode.previousElementSibling.textContent = this.zoom;
-    this.brightnessNode.value = this.brightness;
-    this.brightnessNode.previousElementSibling.textContent = this.brightness;
+    this.zoomNode.value = String(this.zoom);
+    const zoomLabelNode: HTMLElement | null = <HTMLElement>this.zoomNode.previousElementSibling;
+    zoomLabelNode && (zoomLabelNode.textContent = String(this.zoom));
+    this.brightnessNode.value = String(this.brightness);
+    const brightnessLabelNode: HTMLElement | null = <HTMLElement>this.brightnessNode.previousElementSibling;
+    brightnessLabelNode && (brightnessLabelNode.textContent = String(this.brightness));
 
     if (this.state[ev.pointerId].length >= 3) {
       this.state[ev.pointerId].pop();
@@ -129,7 +135,7 @@ export default class Touch {
     this.state[ev.pointerId].push(ev);
   }
 
-  setStyle() {
+  protected setStyle(): void {
     const scale = 1 + this.zoom / 10;
     this.imgNode.style.transform = `
       scale(${scale}) 
@@ -138,18 +144,15 @@ export default class Touch {
     this.imgNode.style.filter = `brightness(${this.brightness}%)`;
   }
 
-  /**
-   * @param {Event} ev
-   */
-  upHandler(ev) {
+  protected upHandler(ev: PointerEvent): void {
     delete this.state[ev.pointerId];
   }
 
-  getSegment(ev2, ev1) {
+  public getSegment(ev2: PointerEvent, ev1: PointerEvent): number {
     return Math.sqrt((Math.round(ev2.x) - Math.round(ev1.x)) ** 2 + (Math.round(ev2.y) - Math.round(ev1.y)) ** 2);
   }
 
-  getAngle(ev2, ev1) {
+  public getAngle(ev2: PointerEvent, ev1: PointerEvent): number {
     return (Math.atan2(Math.round(ev2.y) - Math.round(ev1.y), Math.round(ev2.x) - Math.round(ev1.x)) * 180) / Math.PI;
   }
 }
