@@ -2,8 +2,8 @@ const PUBLIC_PATH = require('path').join(__dirname, 'public');
 
 module.exports = {
   entry: {
-    index: './src/index.js',
-    video: './src/video.js',
+    index: './src/index.ts',
+    video: './src/video.ts',
   },
   output: {
     path: PUBLIC_PATH,
@@ -18,6 +18,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.ts$/,
+        use: 'ts-loader',
+      },
+      {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
@@ -30,5 +34,8 @@ module.exports = {
         loader: 'url-loader',
       },
     ],
+  },
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ]
   },
 };
