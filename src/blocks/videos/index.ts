@@ -1,6 +1,6 @@
-import './style.scss';
-import Video from '../../modules/Video';
 import IVideoData from '../../interfaces/IVideoData';
+import Video from '../../modules/Video';
+import './style.scss';
 
 document.addEventListener('DOMContentLoaded', () => {
   async function initVideo(videoContainerNode: HTMLElement, src: string) {
@@ -16,14 +16,16 @@ document.addEventListener('DOMContentLoaded', () => {
         return
       }
       json.videos.forEach((video: IVideoData) => {
-        const videoTemplate: HTMLTemplateElement = <HTMLTemplateElement>document.querySelector('#video');
-        const videoTemplateNode: HTMLElement | null = videoTemplate ? <HTMLElement>videoTemplate.content.cloneNode(true) : null;
+        const videoTemplate: HTMLTemplateElement | null = document.querySelector('#video');
+        const videoTemplateNode: DocumentFragment | null = videoTemplate ? videoTemplate.content.cloneNode(true) as DocumentFragment : null;
         if (!videoTemplateNode) {
           return
         }
-        const videoContainerNode: HTMLElement | null = <HTMLElement>videoTemplateNode.querySelector('.video');
+        const videoContainerNode: HTMLElement | null = videoTemplateNode.querySelector('.video');
         videosNode.appendChild(videoTemplateNode);
-        initVideo(videoContainerNode, video.src);
+        if (videoContainerNode) {
+          initVideo(videoContainerNode, video.src);
+        }
       });
     });
 });

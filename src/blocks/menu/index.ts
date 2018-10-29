@@ -1,5 +1,5 @@
-import './style.scss';
 import IItemMenuData from '../../interfaces/IItemMenuData';
+import './style.scss';
 
 document.addEventListener('DOMContentLoaded', () => {
   fetch('api/menu.json')
@@ -10,11 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
       json.links.forEach((link: IItemMenuData) => {
         const menuItemHeader: HTMLTemplateElement | null = document.querySelector('#menuItemHeader');
         const menuItemFooter: HTMLTemplateElement | null = document.querySelector('#menuItemFooter');
-        const menuItemHeaderTemplate: HTMLElement | null = menuItemHeader ? <HTMLElement> menuItemHeader.content.cloneNode(true) : null;
-        const menuItemFooterTemplate: HTMLElement | null = menuItemFooter ? <HTMLElement> menuItemFooter.content.cloneNode(true) : null;
+        const menuItemHeaderTemplate: DocumentFragment | null = menuItemHeader ? menuItemHeader.content.cloneNode(true) as DocumentFragment : null;
+        const menuItemFooterTemplate: DocumentFragment | null = menuItemFooter ? menuItemFooter.content.cloneNode(true) as DocumentFragment : null;
 
         if (menuItemHeaderTemplate) {
-          const menuLinkNode: HTMLLinkElement = <HTMLLinkElement> menuItemHeaderTemplate.querySelector('.menu__link');
+          const menuLinkNode: HTMLLinkElement | null = menuItemHeaderTemplate.querySelector('.menu__link');
           if (menuLinkNode) {
             menuLinkNode.textContent = link.name;
             menuLinkNode.href = link.href;
@@ -23,18 +23,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           }
 
-          menuListHeaderNode && menuListHeaderNode.appendChild(menuItemHeaderTemplate);
+          if (menuListHeaderNode) {
+            menuListHeaderNode.appendChild(menuItemHeaderTemplate);
+          }
         }
 
         if (menuItemFooterTemplate) {
-          const menuLinkNode: HTMLLinkElement = <HTMLLinkElement> menuItemFooterTemplate.querySelector('.menu__link');
+          const menuLinkNode: HTMLLinkElement | null = menuItemFooterTemplate.querySelector('.menu__link');
 
           if (menuLinkNode) {
             menuLinkNode.textContent = link.name;
             menuLinkNode.href = link.href;
           }
 
-          menuListFooterNode && menuListFooterNode.appendChild(menuItemFooterTemplate);
+          if (menuListFooterNode) {
+            menuListFooterNode.appendChild(menuItemFooterTemplate);
+          }
         }
 
       });
@@ -44,17 +48,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuWrapper = document.querySelector('.menu__wrapper');
   const page = document.querySelector('.page');
 
-  menuBurger && menuBurger.addEventListener('click', event => {
-    event.stopPropagation();
-    menuWrapper && menuWrapper.classList.toggle('menu__wrapper--show');
-  });
+  if (menuBurger) {
+    menuBurger.addEventListener('click', event => {
+      event.stopPropagation();
+      if (menuWrapper) {
+        menuWrapper.classList.toggle('menu__wrapper--show');
+      }
+    });
+  }
 
-  page && page.addEventListener('click', event => {
-    event.stopPropagation();
-    menuWrapper && menuWrapper.classList.remove('menu__wrapper--show');
-  });
+  if (page) {
+    page.addEventListener('click', event => {
+      event.stopPropagation();
+      if (menuWrapper) {
+        menuWrapper.classList.remove('menu__wrapper--show');
+      }
+    });
+  }
 
-  menuWrapper && menuWrapper.addEventListener('click', event => {
-    event.stopPropagation();
-  });
+  if (menuWrapper) {
+    menuWrapper.addEventListener('click', event => {
+      event.stopPropagation();
+    });
+  }
 });

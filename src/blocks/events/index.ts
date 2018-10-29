@@ -1,7 +1,7 @@
-import './style.scss';
 import IEventData from '../../interfaces/IEventData';
 import ITouch from '../../interfaces/ITouch';
 import Touch from '../../modules/Touch';
+import './style.scss';
 
 document.addEventListener('DOMContentLoaded', () => {
   fetch('https://smarthouse-server.herokuapp.com/api/events/', { method: 'POST' })
@@ -15,14 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
       json.events.forEach((event: IEventData) => {
         const eventTemplateNode: HTMLTemplateElement | null = document.querySelector('#event');
-        const eventTemplate: HTMLElement | null = eventTemplateNode ? <HTMLElement> eventTemplateNode.content.cloneNode(true) : null;
+        const eventTemplate: DocumentFragment | null = eventTemplateNode ? eventTemplateNode.content.cloneNode(true) as DocumentFragment : null;
 
         if (!eventTemplate) {
           return;
         }
 
         const eventNodeCont = eventTemplate.querySelector('.events__event');
-        eventNodeCont && eventNodeCont.classList.add(`events__event--${event.size}`);
+        if (eventNodeCont) {
+          eventNodeCont.classList.add(`events__event--${event.size}`);
+        }
         const eventIcon = eventTemplate.querySelector('.events__icon');
         if (eventIcon) {
           eventIcon.classList.add(`event__icon--${event.icon}`);
@@ -30,8 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (event.type === 'critical') {
           const eventInfo = eventTemplate.querySelector('.event__info');
-          eventInfo && eventInfo.classList.add('event__info--critical');
-          eventIcon && eventIcon.classList.add(`event__icon--${event.icon}--white`);
+          if (eventInfo) {
+            eventInfo.classList.add('event__info--critical');
+          }
+          if (eventIcon) {
+            eventIcon.classList.add(`event__icon--${event.icon}--white`);
+          }
         }
         const eventTitle = eventTemplate.querySelector('.event__title');
         if (eventTitle) {
@@ -54,51 +60,78 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (event.description || event.data) {
           const eventDataNode: HTMLTemplateElement | null = eventsNode.querySelector('#eventData');
-          const eventDataTemplate: HTMLElement | null = eventDataNode ? <HTMLElement>eventDataNode.content.cloneNode(true) : null;
+          const eventDataTemplate: DocumentFragment | null = eventDataNode ? eventDataNode.content.cloneNode(true) as DocumentFragment : null;
           const dataNode: HTMLElement | null = eventDataTemplate ? eventDataTemplate.querySelector('.event__data') : null;
           const eventGraphNode: HTMLTemplateElement | null = eventsNode.querySelector('#eventGraph');
-          const eventGraphTemplate: HTMLElement | null = eventGraphNode ? <HTMLElement>eventGraphNode.content.cloneNode(true) : null;
+          const eventGraphTemplate: DocumentFragment | null = eventGraphNode ? eventGraphNode.content.cloneNode(true) as DocumentFragment : null;
           const eventMicroclimateNode: HTMLTemplateElement | null = eventsNode.querySelector('#eventMicroclimate');
-          const eventMicroclimateTemplate: HTMLElement | null = eventMicroclimateNode ? <HTMLElement>eventMicroclimateNode.content.cloneNode(true) : null;
+          const eventMicroclimateTemplate: DocumentFragment | null = eventMicroclimateNode ? eventMicroclimateNode.content.cloneNode(true) as DocumentFragment : null;
           const eventMediaNode: HTMLTemplateElement | null = eventsNode.querySelector('#eventMedia');
-          const eventMediaTemplate: HTMLElement | null = eventMediaNode ? <HTMLElement>eventMediaNode.content.cloneNode(true) : null;
+          const eventMediaTemplate: DocumentFragment | null = eventMediaNode ? eventMediaNode.content.cloneNode(true) as DocumentFragment : null;
           const eventButtonsNode: HTMLTemplateElement | null = eventsNode.querySelector('#eventButtons');
-          const eventButtonsTemplate: HTMLElement | null = eventButtonsNode ? <HTMLElement>eventButtonsNode.content.cloneNode(true) : null;
+          const eventButtonsTemplate: DocumentFragment | null = eventButtonsNode ? eventButtonsNode.content.cloneNode(true) as DocumentFragment : null;
           const eventWalleNode: HTMLTemplateElement | null = eventsNode.querySelector('#eventWalle');
-          const eventWalleTemplate: HTMLElement | null = eventWalleNode ? <HTMLElement>eventWalleNode.content.cloneNode(true) : null;
+          const eventWalleTemplate: DocumentFragment | null = eventWalleNode ? eventWalleNode.content.cloneNode(true) as DocumentFragment : null;
 
           if (event.data) {
             if (event.data.type && eventDataTemplate && eventGraphTemplate) {
               const eventData = eventDataTemplate.querySelector('.event__data');
-              eventData && eventData.appendChild(eventGraphTemplate);
+              if (eventData) {
+                eventData.appendChild(eventGraphTemplate);
+              }
             }
             if (event.data.temperature && eventMicroclimateTemplate && eventMicroclimateTemplate) {
               const microclimate: HTMLElement | null = eventMicroclimateTemplate.querySelector('.microclimate__value--temperature');
               const humidity: HTMLElement | null = eventMicroclimateTemplate.querySelector('.microclimate__value--humidity');
-              microclimate && (microclimate.textContent = String(event.data.temperature));
-              humidity && (humidity.textContent = String(event.data.humidity));
-              dataNode && dataNode.appendChild(eventMicroclimateTemplate);
+              if (microclimate) {
+                microclimate.textContent = String(event.data.temperature);
+              }
+              if (humidity) {
+
+                humidity.textContent = String(event.data.humidity);
+              }
+              if (dataNode) {
+                dataNode.appendChild(eventMicroclimateTemplate);
+              }
             }
             if (event.data.track && eventMediaTemplate && eventMediaTemplate) {
               const albumcover: HTMLImageElement | null = eventMediaTemplate.querySelector('.media__albumcover');
               const artist: HTMLElement | null = eventMediaTemplate.querySelector('.media__artist');
               const time: HTMLElement | null = eventMediaTemplate.querySelector('.media__time-value');
               const volume: HTMLElement | null = eventMediaTemplate.querySelector('.media__volume-value');
-              albumcover && (albumcover.src = String(event.data.albumcover));
-              artist && (artist.textContent = `${event.data.artist} - ${event.data.track.name}`);
-              time && (time.textContent = event.data.track.length);
-              volume && (volume.textContent = String(event.data.volume));
-              dataNode && dataNode.appendChild(eventMediaTemplate);
+              if (albumcover) {
+                albumcover.src = String(event.data.albumcover);
+              }
+              if (artist) {
+                artist.textContent = `${event.data.artist} - ${event.data.track.name}`;
+              }
+              if (time) {
+                time.textContent = event.data.track.length;
+              }
+              if (volume) {
+                volume.textContent = String(event.data.volume);
+              }
+              if (dataNode) {
+                dataNode.appendChild(eventMediaTemplate);
+              }
             }
             if (event.data.buttons && eventButtonsTemplate) {
               const b1 = eventButtonsTemplate.querySelector('.button--col1');
               const b2 = eventButtonsTemplate.querySelector('.button--col2');
-              b1 && (b1.textContent = event.data.buttons[0]);
-              b2 && (b2.textContent = event.data.buttons[1]);
-              dataNode && dataNode.appendChild(eventButtonsTemplate);
+              if (b1) {
+                b1.textContent = event.data.buttons[0];
+              }
+              if (b2) {
+                b2.textContent = event.data.buttons[1];
+              }
+              if (dataNode) {
+                dataNode.appendChild(eventButtonsTemplate);
+              }
             }
             if (event.data.image && eventWalleTemplate) {
-              dataNode && dataNode.appendChild(eventWalleTemplate);
+              if (dataNode) {
+                dataNode.appendChild(eventWalleTemplate);
+              }
             }
           }
 
@@ -113,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         } else {
           const eventControlsNode: HTMLTemplateElement | null = eventsNode.querySelector('#eventControls');
-          const eventControlsTemplate: HTMLElement | null = eventControlsNode ? <HTMLElement>eventControlsNode.content.cloneNode(true) : null;
+          const eventControlsTemplate: DocumentFragment | null = eventControlsNode ? eventControlsNode.content.cloneNode(true) as DocumentFragment : null;
           if (eventControlsTemplate) {
             const eventNode = eventControlsTemplate.querySelector('.event');
             if (eventNode) {
@@ -127,9 +160,9 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     })
     .then(() => {
-      const imgNode: HTMLImageElement | null = <HTMLImageElement>document.querySelector('.walle__img');
-      const zoomNode: HTMLInputElement | null = <HTMLInputElement>document.querySelector('.walle__range--zoom');
-      const brightnessNode: HTMLInputElement | null = <HTMLInputElement>document.querySelector('.walle__range--brightness');
+      const imgNode: HTMLImageElement | null = document.querySelector('.walle__img');
+      const zoomNode: HTMLInputElement | null = document.querySelector('.walle__range--zoom');
+      const brightnessNode: HTMLInputElement | null = document.querySelector('.walle__range--brightness');
       if (imgNode && zoomNode && brightnessNode) {
         const touch: ITouch = new Touch(imgNode, zoomNode, brightnessNode);
         touch.init();
@@ -140,13 +173,17 @@ document.addEventListener('DOMContentLoaded', () => {
       for (let i = 0; i < events.length; i += 1) {
         events[i].addEventListener('mouseover', function (this: HTMLElement, event: Event) {
           event.stopPropagation();
-          const eventNode: HTMLElement = <HTMLElement>this.querySelector('.event__controls');
-          eventNode && (eventNode.style.visibility = 'visible');
+          const eventNode: HTMLElement | null = this.querySelector('.event__controls');
+          if (eventNode) {
+            eventNode.style.visibility = 'visible';
+          }
         });
         events[i].addEventListener('mouseout', function (this: HTMLElement, event: Event) {
           event.stopPropagation();
-          const eventNode: HTMLElement = <HTMLElement>this.querySelector('.event__controls');
-          eventNode && (eventNode.style.visibility = 'hidden');
+          const eventNode: HTMLElement | null = this.querySelector('.event__controls');
+          if (eventNode) {
+            eventNode.style.visibility = 'hidden';
+          }
         });
       }
     });
