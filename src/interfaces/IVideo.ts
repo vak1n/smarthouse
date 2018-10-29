@@ -1,4 +1,4 @@
-export default interface VideoInterface {
+export default interface IVideo {
   videoContainerNode: HTMLElement;
   init(url: string): void;
 }

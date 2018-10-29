@@ -1,6 +1,6 @@
 import './style.scss';
 import Video from '../../modules/video';
-import VideoDataInterface from '../../interfaces/videoDataInterface';
+import IVideoData from '../../interfaces/IVideoData';
 
 document.addEventListener('DOMContentLoaded', () => {
   async function initVideo(videoContainerNode: HTMLElement, src: string) {
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!videosNode) {
         return
       }
-      json.videos.forEach((video: VideoDataInterface) => {
+      json.videos.forEach((video: IVideoData) => {
         const videoTemplate: HTMLTemplateElement = <HTMLTemplateElement>document.querySelector('#video');
         const videoTemplateNode: HTMLElement | null = videoTemplate ? <HTMLElement>videoTemplate.content.cloneNode(true) : null;
         if (!videoTemplateNode) {

@@ -1,4 +1,4 @@
-import AudioToolInterface from '../interfaces/audioToolInterface';
+import IAudioTool from '../interfaces/IAudioTool';
 
 declare global {
   interface Window {
@@ -7,7 +7,7 @@ declare global {
   }
 }
 
-export default class AudioAnalyser implements AudioToolInterface {
+export default class AudioAnalyser implements IAudioTool {
   protected mediaNode: HTMLMediaElement;
   protected analyserNode: HTMLCanvasElement;
   protected data: Uint8Array | [];

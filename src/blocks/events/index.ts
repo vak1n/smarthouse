@@ -1,6 +1,6 @@
 import './style.scss';
-import EventDataInterface from '../../interfaces/eventDataInterface';
-import TouchInterface from '../../interfaces/touchInterface';
+import IEventData from '../../interfaces/IEventData';
+import ITouch from '../../interfaces/ITouch';
 import Touch from '../../modules/touch';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      json.events.forEach((event: EventDataInterface) => {
+      json.events.forEach((event: IEventData) => {
         const eventTemplateNode: HTMLTemplateElement | null = document.querySelector('#event');
         const eventTemplate: HTMLElement | null = eventTemplateNode ? <HTMLElement> eventTemplateNode.content.cloneNode(true) : null;
 
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const zoomNode: HTMLInputElement | null = <HTMLInputElement>document.querySelector('.walle__range--zoom');
       const brightnessNode: HTMLInputElement | null = <HTMLInputElement>document.querySelector('.walle__range--brightness');
       if (imgNode && zoomNode && brightnessNode) {
-        const touch: TouchInterface = new Touch(imgNode, zoomNode, brightnessNode);
+        const touch: ITouch = new Touch(imgNode, zoomNode, brightnessNode);
         touch.init();
       }
     })

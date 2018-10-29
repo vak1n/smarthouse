@@ -1,4 +1,4 @@
-export default interface TouchInterface {
+export default interface ITouch {
   imgNode: HTMLImageElement;
   zoomNode: HTMLInputElement;
   brightnessNode: HTMLInputElement;

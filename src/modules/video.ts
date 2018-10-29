@@ -1,10 +1,10 @@
 import Hls from 'hls.js';
-import AudioToolInterface from '../interfaces/audioToolInterface';
-import VideoInterface from '../interfaces/videoInterface';
+import IAudioTool from '../interfaces/IAudioTool';
+import IVideo from '../interfaces/IVideo';
 import AudioAnalyser from './audioAnalyser';
 import Illumination from './illumination';
 
-export default class Video implements VideoInterface {
+export default class Video implements IVideo {
   public videoContainerNode: HTMLElement;
   protected videoContainerClass: string;
   protected videoNode: HTMLVideoElement | null;
@@ -18,8 +18,8 @@ export default class Video implements VideoInterface {
   protected contrastNode: HTMLInputElement | null;
   protected curtain: HTMLElement | null;
 
-  protected audioAnalyser: AudioToolInterface | undefined;
-  protected illumination: AudioToolInterface | undefined;
+  protected audioAnalyser: IAudioTool | undefined;
+  protected illumination: IAudioTool | undefined;
 
   constructor(videoContainerNode: HTMLElement) {
     this.videoContainerNode = videoContainerNode;

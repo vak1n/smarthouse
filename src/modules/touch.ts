@@ -1,6 +1,6 @@
-import TouchInterface from '../interfaces/touchInterface';
+import ITouch from '../interfaces/ITouch';
 
-export default class Touch implements TouchInterface {
+export default class Touch implements ITouch {
   public imgNode: HTMLImageElement;
   public zoomNode: HTMLInputElement;
   public brightnessNode: HTMLInputElement;

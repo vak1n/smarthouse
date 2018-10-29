@@ -1,4 +1,4 @@
-export default interface EventDataInterface {
+export default interface IEventData {
   type: string;
   title: string;
   source: string;

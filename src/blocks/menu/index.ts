@@ -1,5 +1,5 @@
 import './style.scss';
-import ItemMenuDataInterface from '../../interfaces/itemMenuDataInterface';
+import IItemMenuData from '../../interfaces/IItemMenuData';
 
 document.addEventListener('DOMContentLoaded', () => {
   fetch('api/menu.json')
@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(json => {
       const menuListHeaderNode: HTMLElement | null = document.querySelector('.js-menu__list--header');
       const menuListFooterNode: HTMLElement | null = document.querySelector('.js-menu__list--footer');
-      json.links.forEach((link: ItemMenuDataInterface) => {
+      json.links.forEach((link: IItemMenuData) => {
         const menuItemHeader: HTMLTemplateElement | null = document.querySelector('#menuItemHeader');
         const menuItemFooter: HTMLTemplateElement | null = document.querySelector('#menuItemFooter');
         const menuItemHeaderTemplate: HTMLElement | null = menuItemHeader ? <HTMLElement> menuItemHeader.content.cloneNode(true) : null;

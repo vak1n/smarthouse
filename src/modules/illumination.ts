@@ -1,6 +1,6 @@
-import AudioToolInterface from '../interfaces/audioToolInterface';
+import IAudioTool from '../interfaces/IAudioTool';
 
-export default class Illumination implements AudioToolInterface {
+export default class Illumination implements IAudioTool {
   protected mediaNode: HTMLVideoElement;
   protected canvasCtx: CanvasRenderingContext2D | null;
   protected illuminationValueNode: HTMLElement;
