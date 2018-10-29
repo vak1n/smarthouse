@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "dependencies": {
+    "@types/hls.js": "^0.10.2",
     "css-loader": "^1.0.0",
+    "hls.js": "^0.11.0",
     "less": "^3.8.0",
     "node-sass": "^4.9.3",
     "sass-loader": "^7.1.0",

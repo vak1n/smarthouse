@@ -1,4 +1,4 @@
-export default interface EventInterface {
+export default interface EventDataInterface {
   type: string,
   title: string,
   source: string,

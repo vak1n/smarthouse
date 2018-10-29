@@ -1,12 +1,27 @@
+import AudioToolInterface from '../interfaces/audioToolInterface';
+import VideoInterface from '../interfaces/videoInterface';
 import AudioAnalyser from './audioAnalyser';
 import Illumination from './illumination';
+import Hls from 'hls.js';
 
-export default class Video {
-  /**
-   * @param {Element} videoContainerNode
-   */
-  constructor(videoContainerNode) {
-    this.self = this;
+export default class Video implements VideoInterface {
+  videoContainerNode: HTMLElement;
+  videoContainerClass: string;
+  videoNode: HTMLVideoElement | null;
+  analyserNode: HTMLCanvasElement | null;
+  canvasNode: HTMLCanvasElement | null;
+  rollupNode: HTMLElement | null;
+  brightnessContainerNode: HTMLElement | null;
+  illuminationValueNode: HTMLElement | null;
+  contrastContainerNode: HTMLElement | null;
+  brightnessNode: HTMLInputElement | null;
+  contrastNode: HTMLInputElement | null;
+  curtain: HTMLElement | null;
+
+  audioAnalyser: AudioToolInterface | undefined;
+  illumination: AudioToolInterface | undefined;
+
+  constructor(videoContainerNode: HTMLElement) {
     this.videoContainerNode = videoContainerNode;
     this.videoContainerClass = videoContainerNode.className;
     this.videoNode = this.videoContainerNode.querySelector(`.${this.videoContainerClass}__video`);
@@ -18,41 +33,59 @@ export default class Video {
     );
     this.illuminationValueNode = this.videoContainerNode.querySelector(`.${this.videoContainerClass}__value--illumination`);
     this.contrastContainerNode = this.videoContainerNode.querySelector(`.${this.videoContainerClass}__range--contrast`);
-    this.brightnessNode = this.brightnessContainerNode.querySelector(`.${this.videoContainerClass}__range-input`);
-    this.contrastNode = this.contrastContainerNode.querySelector(`.${this.videoContainerClass}__range-input`);
+    this.brightnessNode = this.brightnessContainerNode
+      ? this.brightnessContainerNode.querySelector(`.${this.videoContainerClass}__range-input`)
+      : null;
+    this.contrastNode = this.contrastContainerNode
+      ? this.contrastContainerNode.querySelector(`.${this.videoContainerClass}__range-input`)
+      : null;
     this.curtain = document.querySelector('.page__curtain');
 
-    this.audioAnalyser = new AudioAnalyser(this.videoNode, this.analyserNode);
-    this.illumination = new Illumination(this.videoNode, this.canvasNode, this.illuminationValueNode);
+    if (this.videoNode && this.analyserNode) {
+      this.audioAnalyser = new AudioAnalyser(this.videoNode, this.analyserNode);
+    }
+    if (this.videoNode && this.canvasNode && this.illuminationValueNode) {
+      this.illumination = new Illumination(this.videoNode, this.canvasNode, this.illuminationValueNode);
+    }
   }
 
-  init(url) {
-    if (window.Hls.isSupported()) {
-      const hls = new window.Hls();
+  public init(url: string): void {
+    if (!this.videoNode) {
+      return;
+    }
+
+    if (Hls.isSupported()) {
+      const hls = new Hls();
       hls.loadSource(url);
       hls.attachMedia(this.videoNode);
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        this.videoNode.play();
+        this.videoNode && this.videoNode.play();
       });
     } else if (this.videoNode.canPlayType('application/vnd.apple.mpegurl')) {
       this.videoNode.src = 'https://videos-dev.github.io/streams/x36xhzz/x36xhzz.m3u8';
       this.videoNode.addEventListener('loadedmetadata', () => {
-        this.videoNode.play();
+        this.videoNode && this.videoNode.play();
       });
     }
 
     this.videoContainerNode.addEventListener('click', ev => {
       this.fullScreen(ev);
     });
-    this.rollupNode.addEventListener('click', ev => {
-      this.rollup(ev);
-    });
-    this.brightnessNode.addEventListener('input', ev => {
-      this.changeQuality(ev);
-    });
-    this.contrastNode.addEventListener('input', ev => {
-      this.changeQuality(ev);
-    });
+    if (this.rollupNode) {
+      this.rollupNode.addEventListener('click', ev => {
+        this.rollup(ev);
+      });
+    }
+    if (this.brightnessNode) {
+      this.brightnessNode.addEventListener('input', ev => {
+        this.changeQuality();
+      });
+    }
+    if (this.contrastNode) {
+      this.contrastNode.addEventListener('input', ev => {
+        this.changeQuality();
+      });
+    }
 
     window.addEventListener('resize', () => {
       if (!this.isFullScreen() || !this.issetFullScreen()) {
@@ -62,7 +95,7 @@ export default class Video {
     });
   }
 
-  fullScreen(ev) {
+  public fullScreen(ev: Event): void {
     ev.stopPropagation();
     if (this.isFullScreen() || this.issetFullScreen()) {
       return;
@@ -70,17 +103,21 @@ export default class Video {
     document.body.style.overflow = 'hidden';
     this.videoContainerNode.classList.add(`${this.videoContainerClass}--fullscreen`);
     this.resizeVideo();
-    this.videoNode.muted = false;
+    this.videoNode && (this.videoNode.muted = false);
     setTimeout(() => {
-      this.curtain.style.display = 'block';
-      this.curtain.style.opacity = 1;
+      this.curtain && (this.curtain.style.display = 'block');
+      this.curtain && (this.curtain.style.opacity = '1');
       this.videoContainerNode.classList.add(`${this.videoContainerClass}--show-control`);
-      this.audioAnalyser.on();
-      this.illumination.on();
+      this.audioAnalyser && this.audioAnalyser.on();
+      this.illumination && this.illumination.on();
     }, 300);
   }
 
-  resizeVideo() {
+  public resizeVideo(): void {
+    if (!document.documentElement || !this.videoNode) {
+      return;
+    }
+
     const bounding = this.videoContainerNode.getBoundingClientRect();
     const sX = document.documentElement.clientWidth / this.videoContainerNode.clientWidth;
     const sY = document.documentElement.clientHeight / this.videoContainerNode.clientHeight;
@@ -98,32 +135,37 @@ export default class Video {
       scale3d(${s}, ${s}, 1)`;
   }
 
-  rollup(ev) {
+  public rollup(ev: Event): void {
     ev.stopPropagation();
     if (!this.isFullScreen()) {
       return;
     }
-    this.illumination.off();
-    this.audioAnalyser.off();
-    this.videoNode.muted = true;
-    this.videoNode.style.transform = '';
+    this.illumination && this.illumination.off();
+    this.audioAnalyser && this.audioAnalyser.off();
+    this.videoNode && (this.videoNode.muted = true);
+    this.videoNode && (this.videoNode.style.transform = '');
     this.videoContainerNode.classList.remove(`${this.videoContainerClass}--fullscreen`);
     this.videoContainerNode.classList.remove(`${this.videoContainerClass}--show-control`);
-    this.curtain.style.display = 'none';
-    this.curtain.style.opacity = 0;
+    this.curtain && (this.curtain.style.display = 'none');
+    this.curtain && (this.curtain.style.opacity = '0');
     document.body.style.overflow = '';
   }
 
-  isFullScreen() {
+  protected isFullScreen(): boolean {
     return this.videoContainerNode.classList.contains(`${this.videoContainerClass}--fullscreen`);
   }
 
-  issetFullScreen() {
+  protected issetFullScreen(): boolean {
     return document.querySelectorAll(`.${this.videoContainerClass}--fullscreen`).length > 0;
   }
 
-  changeQuality() {
-    const filter = `brightness(${this.brightnessNode.value / 100}) contrast(${this.contrastNode.value / 100})`;
+  protected changeQuality(): void {
+    if (!this.videoNode) {
+      return;
+    }
+    const brightness: number = this.brightnessNode ? Number(this.brightnessNode.value) : 100;
+    const contrast: number = this.contrastNode ? Number(this.contrastNode.value) : 100;
+    const filter = `brightness(${brightness / 100}) contrast(${contrast / 100})`;
     this.videoNode.style.filter = filter;
   }
 }

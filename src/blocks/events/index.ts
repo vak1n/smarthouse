@@ -1,5 +1,5 @@
 import './style.scss';
-import EventInterface from '../../interfaces/eventInterface';
+import EventDataInterface from '../../interfaces/eventDataInterface';
 import TouchInterface from '../../interfaces/touchInterface';
 import Touch from '../../modules/touch';
 
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      json.events.forEach((event: EventInterface) => {
+      json.events.forEach((event: EventDataInterface) => {
         const eventTemplateNode: HTMLTemplateElement | null = document.querySelector('#event');
         const eventTemplate: HTMLElement | null = eventTemplateNode ? <HTMLElement> eventTemplateNode.content.cloneNode(true) : null;
 

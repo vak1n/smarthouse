@@ -1,4 +1,4 @@
-export default interface ItemMenuInterface {
+export default interface ItemMenuDataInterface {
   name: string,
   href: string,
   selected: boolean
