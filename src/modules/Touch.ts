@@ -49,14 +49,18 @@ export default class Touch implements ITouch {
       this.zoom = Number(this.zoomNode.value);
       this.setStyle();
       const labelNode = this.zoomNode.previousElementSibling;
-      labelNode && (labelNode.textContent = String(this.zoom));
+      if (labelNode) {
+        labelNode.textContent = String(this.zoom);
+      }
     });
 
     this.brightnessNode.addEventListener('input', (ev) => {
       this.brightness = Number(this.brightnessNode.value);
       this.setStyle();
       const labelNode = this.zoomNode.previousElementSibling;
-      labelNode && (labelNode.textContent = String(this.brightness));
+      if (labelNode) {
+        labelNode.textContent = String(this.brightness);
+      }
     });
   }
 
@@ -124,10 +128,14 @@ export default class Touch implements ITouch {
     this.setStyle();
     this.zoomNode.value = String(this.zoom);
     const zoomLabelNode: HTMLElement | null = this.zoomNode.previousElementSibling as HTMLElement;
-    zoomLabelNode && (zoomLabelNode.textContent = String(this.zoom));
+    if (zoomLabelNode) {
+      zoomLabelNode.textContent = String(this.zoom);
+    }
     this.brightnessNode.value = String(this.brightness);
     const brightnessLabelNode: HTMLElement | null = this.brightnessNode.previousElementSibling as HTMLElement;
-    brightnessLabelNode && (brightnessLabelNode.textContent = String(this.brightness));
+    if (brightnessLabelNode) {
+      brightnessLabelNode.textContent = String(this.brightness);
+    }
 
     if (this.state[ev.pointerId].length >= 3) {
       this.state[ev.pointerId].pop();

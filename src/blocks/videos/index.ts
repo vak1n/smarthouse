@@ -1,5 +1,5 @@
 import './style.scss';
-import Video from '../../modules/video';
+import Video from '../../modules/Video';
 import IVideoData from '../../interfaces/IVideoData';
 
 document.addEventListener('DOMContentLoaded', () => {

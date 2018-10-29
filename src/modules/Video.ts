@@ -1,8 +1,8 @@
 import Hls from 'hls.js';
 import IAudioTool from '../interfaces/IAudioTool';
 import IVideo from '../interfaces/IVideo';
-import AudioAnalyser from './audioAnalyser';
-import Illumination from './illumination';
+import AudioAnalyser from './AudioAnalyser';
+import Illumination from './Illumination';
 
 export default class Video implements IVideo {
   public videoContainerNode: HTMLElement;
@@ -31,8 +31,12 @@ export default class Video implements IVideo {
     this.brightnessContainerNode = this.videoContainerNode.querySelector(
       `.${this.videoContainerClass}__range--brightness`,
     );
-    this.illuminationValueNode = this.videoContainerNode.querySelector(`.${this.videoContainerClass}__value--illumination`);
-    this.contrastContainerNode = this.videoContainerNode.querySelector(`.${this.videoContainerClass}__range--contrast`);
+    this.illuminationValueNode = this.videoContainerNode.querySelector(
+      `.${this.videoContainerClass}__value--illumination`,
+    );
+    this.contrastContainerNode = this.videoContainerNode.querySelector(
+      `.${this.videoContainerClass}__range--contrast`,
+    );
     this.brightnessNode = this.brightnessContainerNode
       ? this.brightnessContainerNode.querySelector(`.${this.videoContainerClass}__range-input`)
       : null;
@@ -59,12 +63,16 @@ export default class Video implements IVideo {
       hls.loadSource(url);
       hls.attachMedia(this.videoNode);
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        this.videoNode && this.videoNode.play();
+        if (this.videoNode) {
+          this.videoNode.play();
+        }
       });
     } else if (this.videoNode.canPlayType('application/vnd.apple.mpegurl')) {
       this.videoNode.src = 'https://videos-dev.github.io/streams/x36xhzz/x36xhzz.m3u8';
       this.videoNode.addEventListener('loadedmetadata', () => {
-        this.videoNode && this.videoNode.play();
+        if (this.videoNode) {
+          this.videoNode.play();
+        }
       });
     }
 
@@ -103,13 +111,21 @@ export default class Video implements IVideo {
     document.body.style.overflow = 'hidden';
     this.videoContainerNode.classList.add(`${this.videoContainerClass}--fullscreen`);
     this.resizeVideo();
-    this.videoNode && (this.videoNode.muted = false);
+    if (this.videoNode) {
+      this.videoNode.muted = false;
+    }
     setTimeout(() => {
-      this.curtain && (this.curtain.style.display = 'block');
-      this.curtain && (this.curtain.style.opacity = '1');
+      if (this.curtain) {
+        this.curtain.style.display = 'block';
+        this.curtain.style.opacity = '1';
+      }
       this.videoContainerNode.classList.add(`${this.videoContainerClass}--show-control`);
-      this.audioAnalyser && this.audioAnalyser.on();
-      this.illumination && this.illumination.on();
+      if (this.audioAnalyser) {
+        this.audioAnalyser.on();
+      }
+      if (this.illumination) {
+        this.illumination.on();
+      }
     }, 300);
   }
 
@@ -140,14 +156,22 @@ export default class Video implements IVideo {
     if (!this.isFullScreen()) {
       return;
     }
-    this.illumination && this.illumination.off();
-    this.audioAnalyser && this.audioAnalyser.off();
-    this.videoNode && (this.videoNode.muted = true);
-    this.videoNode && (this.videoNode.style.transform = '');
+    if (this.illumination) {
+      this.illumination.off();
+    }
+    if (this.audioAnalyser) {
+      this.audioAnalyser.off();
+    }
+    if (this.videoNode) {
+      this.videoNode.muted = true;
+      this.videoNode.style.transform = '';
+    }
     this.videoContainerNode.classList.remove(`${this.videoContainerClass}--fullscreen`);
     this.videoContainerNode.classList.remove(`${this.videoContainerClass}--show-control`);
-    this.curtain && (this.curtain.style.display = 'none');
-    this.curtain && (this.curtain.style.opacity = '0');
+    if (this.curtain) {
+      this.curtain.style.display = 'none';
+      this.curtain.style.opacity = '0';
+    }
     document.body.style.overflow = '';
   }
 

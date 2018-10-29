@@ -1,11 +1,11 @@
 import IAudioTool from '../interfaces/IAudioTool';
 
-declare global {
-  interface Window {
-    AudioContext: typeof AudioContext;
-    webkitAudioContext: typeof AudioContext;
-  }
+interface IWindow {
+  AudioContext: typeof AudioContext;
+  webkitAudioContext: typeof AudioContext;
 }
+
+declare const window: IWindow;
 
 export default class AudioAnalyser implements IAudioTool {
   protected mediaNode: HTMLMediaElement;

@@ -36,16 +36,18 @@ export default class Illumination implements IAudioTool {
     let i = -4;
     const step = 5;
     let count = 0;
+    i += step * 4;
 
-    while ((i += step * 4) < data.length) {
+    while (i < data.length) {
       ++count;
       rgb.r += data[i];
       rgb.g += data[i + 1];
       rgb.b += data[i + 2];
+      i += step * 4;
     }
-    rgb.r = ~~(rgb.r / count);
-    rgb.g = ~~(rgb.g / count);
-    rgb.b = ~~(rgb.b / count);
+    rgb.r = Math.floor(rgb.r / count);
+    rgb.g = Math.floor(rgb.g / count);
+    rgb.b = Math.floor(rgb.b / count);
 
     return rgb;
   }

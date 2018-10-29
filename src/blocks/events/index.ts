@@ -1,7 +1,7 @@
 import './style.scss';
 import IEventData from '../../interfaces/IEventData';
 import ITouch from '../../interfaces/ITouch';
-import Touch from '../../modules/touch';
+import Touch from '../../modules/Touch';
 
 document.addEventListener('DOMContentLoaded', () => {
   fetch('https://smarthouse-server.herokuapp.com/api/events/', { method: 'POST' })
