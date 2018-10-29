@@ -1,25 +1,25 @@
+import Hls from 'hls.js';
 import AudioToolInterface from '../interfaces/audioToolInterface';
 import VideoInterface from '../interfaces/videoInterface';
 import AudioAnalyser from './audioAnalyser';
 import Illumination from './illumination';
-import Hls from 'hls.js';
 
 export default class Video implements VideoInterface {
-  videoContainerNode: HTMLElement;
-  videoContainerClass: string;
-  videoNode: HTMLVideoElement | null;
-  analyserNode: HTMLCanvasElement | null;
-  canvasNode: HTMLCanvasElement | null;
-  rollupNode: HTMLElement | null;
-  brightnessContainerNode: HTMLElement | null;
-  illuminationValueNode: HTMLElement | null;
-  contrastContainerNode: HTMLElement | null;
-  brightnessNode: HTMLInputElement | null;
-  contrastNode: HTMLInputElement | null;
-  curtain: HTMLElement | null;
+  public videoContainerNode: HTMLElement;
+  protected videoContainerClass: string;
+  protected videoNode: HTMLVideoElement | null;
+  protected analyserNode: HTMLCanvasElement | null;
+  protected canvasNode: HTMLCanvasElement | null;
+  protected rollupNode: HTMLElement | null;
+  protected brightnessContainerNode: HTMLElement | null;
+  protected illuminationValueNode: HTMLElement | null;
+  protected contrastContainerNode: HTMLElement | null;
+  protected brightnessNode: HTMLInputElement | null;
+  protected contrastNode: HTMLInputElement | null;
+  protected curtain: HTMLElement | null;
 
-  audioAnalyser: AudioToolInterface | undefined;
-  illumination: AudioToolInterface | undefined;
+  protected audioAnalyser: AudioToolInterface | undefined;
+  protected illumination: AudioToolInterface | undefined;
 
   constructor(videoContainerNode: HTMLElement) {
     this.videoContainerNode = videoContainerNode;
@@ -68,21 +68,21 @@ export default class Video implements VideoInterface {
       });
     }
 
-    this.videoContainerNode.addEventListener('click', ev => {
+    this.videoContainerNode.addEventListener('click', (ev) => {
       this.fullScreen(ev);
     });
     if (this.rollupNode) {
-      this.rollupNode.addEventListener('click', ev => {
+      this.rollupNode.addEventListener('click', (ev) => {
         this.rollup(ev);
       });
     }
     if (this.brightnessNode) {
-      this.brightnessNode.addEventListener('input', ev => {
+      this.brightnessNode.addEventListener('input', (ev) => {
         this.changeQuality();
       });
     }
     if (this.contrastNode) {
-      this.contrastNode.addEventListener('input', ev => {
+      this.contrastNode.addEventListener('input', (ev) => {
         this.changeQuality();
       });
     }

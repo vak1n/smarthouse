@@ -8,14 +8,14 @@ declare global {
 }
 
 export default class AudioAnalyser implements AudioToolInterface {
-  mediaNode: HTMLMediaElement;
-  analyserNode: HTMLCanvasElement;
-  data: Uint8Array | [];
-  active: boolean;
+  protected mediaNode: HTMLMediaElement;
+  protected analyserNode: HTMLCanvasElement;
+  protected data: Uint8Array | [];
+  protected active: boolean;
 
-  context: AudioContext;
-  source: MediaElementAudioSourceNode;
-  analyser: AnalyserNode;
+  protected context: AudioContext;
+  protected source: MediaElementAudioSourceNode;
+  protected analyser: AnalyserNode;
 
   constructor(mediaNode: HTMLMediaElement, analyserNode: HTMLCanvasElement) {
     this.mediaNode = mediaNode;
@@ -32,14 +32,18 @@ export default class AudioAnalyser implements AudioToolInterface {
     this.active = false;
   }
 
-  protected analyse(): void {
-    this.data = new Uint8Array(this.analyser.frequencyBinCount);
-    this.analyser.getByteFrequencyData(this.data);
-  }
-
   public on(): void {
     this.active = true;
     this.draw();
+  }
+
+  public off(): void {
+    this.active = false;
+  }
+
+  protected analyse(): void {
+    this.data = new Uint8Array(this.analyser.frequencyBinCount);
+    this.analyser.getByteFrequencyData(this.data);
   }
 
   protected draw(): void {
@@ -65,9 +69,5 @@ export default class AudioAnalyser implements AudioToolInterface {
       analyserContext.fillRect(x, 0, barWidth, barHeight);
       x += barWidth;
     }
-  }
-
-  public off(): void {
-    this.active = false;
   }
 }

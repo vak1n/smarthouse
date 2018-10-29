@@ -1,14 +1,14 @@
 import AudioToolInterface from '../interfaces/audioToolInterface';
 
 export default class Illumination implements AudioToolInterface {
-  mediaNode: HTMLVideoElement;
-  canvasCtx: CanvasRenderingContext2D | null;
-  illuminationValueNode: HTMLElement;
-  active: boolean;
-  frameStep: number;
-  frame: number;
-  width: number;
-  height: number;
+  protected mediaNode: HTMLVideoElement;
+  protected canvasCtx: CanvasRenderingContext2D | null;
+  protected illuminationValueNode: HTMLElement;
+  protected active: boolean;
+  protected frameStep: number;
+  protected frame: number;
+  protected width: number;
+  protected height: number;
 
   constructor(mediaNode: HTMLVideoElement, canvasNode: HTMLCanvasElement, illuminationValueNode: HTMLElement) {
     this.mediaNode = mediaNode;

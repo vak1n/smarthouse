@@ -1,5 +1,5 @@
 export default interface ItemMenuDataInterface {
-  name: string,
-  href: string,
-  selected: boolean
+  name: string;
+  href: string;
+  selected: boolean;
 }

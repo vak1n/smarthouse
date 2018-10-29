@@ -1,16 +1,16 @@
 import TouchInterface from '../interfaces/touchInterface';
 
 export default class Touch implements TouchInterface {
-  state: {[key: string]: PointerEvent[]};
-  imgNode: HTMLImageElement;
-  zoomNode: HTMLInputElement;
-  brightnessNode: HTMLInputElement;
-  zoom: number;
-  deltaX: number;
-  deltaY: number;
-  brightness: number;
-  segment: number;
-  angle: number;
+  public imgNode: HTMLImageElement;
+  public zoomNode: HTMLInputElement;
+  public brightnessNode: HTMLInputElement;
+  protected state: {[key: string]: PointerEvent[]};
+  protected zoom: number;
+  protected deltaX: number;
+  protected deltaY: number;
+  protected brightness: number;
+  protected segment: number;
+  protected angle: number;
 
   constructor(imgNode: HTMLImageElement, zoomNode: HTMLInputElement, brightnessNode: HTMLInputElement) {
     this.state = {};
@@ -26,33 +26,33 @@ export default class Touch implements TouchInterface {
   }
 
   public init(): void {
-    this.imgNode.addEventListener('pointerdown', ev => {
+    this.imgNode.addEventListener('pointerdown', (ev) => {
       this.downHandler(ev);
     });
-    this.imgNode.addEventListener('pointermove', ev => {
+    this.imgNode.addEventListener('pointermove', (ev) => {
       this.moveHandler(ev);
     });
-    this.imgNode.addEventListener('pointerup', ev => {
+    this.imgNode.addEventListener('pointerup', (ev) => {
       this.upHandler(ev);
     });
-    this.imgNode.addEventListener('pointercancel', ev => {
+    this.imgNode.addEventListener('pointercancel', (ev) => {
       this.upHandler(ev);
     });
-    this.imgNode.addEventListener('pointerout', ev => {
+    this.imgNode.addEventListener('pointerout', (ev) => {
       this.upHandler(ev);
     });
-    this.imgNode.addEventListener('pointerleave', ev => {
+    this.imgNode.addEventListener('pointerleave', (ev) => {
       this.upHandler(ev);
     });
 
-    this.zoomNode.addEventListener('input', ev => {
+    this.zoomNode.addEventListener('input', (ev) => {
       this.zoom = Number(this.zoomNode.value);
       this.setStyle();
       const labelNode = this.zoomNode.previousElementSibling;
       labelNode && (labelNode.textContent = String(this.zoom));
     });
 
-    this.brightnessNode.addEventListener('input', ev => {
+    this.brightnessNode.addEventListener('input', (ev) => {
       this.brightness = Number(this.brightnessNode.value);
       this.setStyle();
       const labelNode = this.zoomNode.previousElementSibling;
@@ -123,10 +123,10 @@ export default class Touch implements TouchInterface {
 
     this.setStyle();
     this.zoomNode.value = String(this.zoom);
-    const zoomLabelNode: HTMLElement | null = <HTMLElement>this.zoomNode.previousElementSibling;
+    const zoomLabelNode: HTMLElement | null = this.zoomNode.previousElementSibling as HTMLElement;
     zoomLabelNode && (zoomLabelNode.textContent = String(this.zoom));
     this.brightnessNode.value = String(this.brightness);
-    const brightnessLabelNode: HTMLElement | null = <HTMLElement>this.brightnessNode.previousElementSibling;
+    const brightnessLabelNode: HTMLElement | null = this.brightnessNode.previousElementSibling as HTMLElement;
     brightnessLabelNode && (brightnessLabelNode.textContent = String(this.brightness));
 
     if (this.state[ev.pointerId].length >= 3) {
@@ -135,24 +135,24 @@ export default class Touch implements TouchInterface {
     this.state[ev.pointerId].push(ev);
   }
 
-  protected setStyle(): void {
-    const scale = 1 + this.zoom / 10;
-    this.imgNode.style.transform = `
-      scale(${scale}) 
-      translateX(${Math.round(this.deltaX / scale)}px) 
-      translateY(${Math.round(this.deltaY / scale)}px)`;
-    this.imgNode.style.filter = `brightness(${this.brightness}%)`;
-  }
-
-  protected upHandler(ev: PointerEvent): void {
-    delete this.state[ev.pointerId];
-  }
-
   public getSegment(ev2: PointerEvent, ev1: PointerEvent): number {
     return Math.sqrt((Math.round(ev2.x) - Math.round(ev1.x)) ** 2 + (Math.round(ev2.y) - Math.round(ev1.y)) ** 2);
   }
 
   public getAngle(ev2: PointerEvent, ev1: PointerEvent): number {
     return (Math.atan2(Math.round(ev2.y) - Math.round(ev1.y), Math.round(ev2.x) - Math.round(ev1.x)) * 180) / Math.PI;
+  }
+
+  protected setStyle(): void {
+    const scale = 1 + this.zoom / 10;
+    this.imgNode.style.transform = `
+      scale(${scale})
+      translateX(${Math.round(this.deltaX / scale)}px)
+      translateY(${Math.round(this.deltaY / scale)}px)`;
+    this.imgNode.style.filter = `brightness(${this.brightness}%)`;
+  }
+
+  protected upHandler(ev: PointerEvent): void {
+    delete this.state[ev.pointerId];
   }
 }

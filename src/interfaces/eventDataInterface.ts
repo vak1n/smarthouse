@@ -1,10 +1,10 @@
 export default interface EventDataInterface {
-  type: string,
-  title: string,
-  source: string,
-  time: string,
-  description: string | null,
-  icon: string,
+  type: string;
+  title: string;
+  source: string;
+  time: string;
+  description: string | null;
+  icon: string;
   data?: {
     type?: string,
     values?: object[],
@@ -16,13 +16,13 @@ export default interface EventDataInterface {
     artist?: string,
     track?: {
       name: string,
-      length: string
+      length: string,
     },
     volume?: number,
 
     buttons?: string[],
 
-    image?: string
-  },
-  size: string,
+    image?: string,
+  };
+  size: string;
 }
