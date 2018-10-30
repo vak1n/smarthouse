@@ -1,3 +1,4 @@
+import DomHeleper from '../../helepers/DomHeleper';
 import IItemMenuData from '../../interfaces/IItemMenuData';
 import './style.scss';
 
@@ -10,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
       json.links.forEach((link: IItemMenuData) => {
         const menuItemHeader: HTMLTemplateElement | null = document.querySelector('#menuItemHeader');
         const menuItemFooter: HTMLTemplateElement | null = document.querySelector('#menuItemFooter');
-        const menuItemHeaderTemplate: DocumentFragment | null = menuItemHeader ? menuItemHeader.content.cloneNode(true) as DocumentFragment : null;
-        const menuItemFooterTemplate: DocumentFragment | null = menuItemFooter ? menuItemFooter.content.cloneNode(true) as DocumentFragment : null;
+        const menuItemHeaderTemplate: DocumentFragment | null = menuItemHeader ? DomHeleper.cloneNode(menuItemHeader.content) : null;
+        const menuItemFooterTemplate: DocumentFragment | null = menuItemFooter ? DomHeleper.cloneNode(menuItemFooter.content) : null;
 
         if (menuItemHeaderTemplate) {
           const menuLinkNode: HTMLLinkElement | null = menuItemHeaderTemplate.querySelector('.menu__link');

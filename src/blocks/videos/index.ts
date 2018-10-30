@@ -1,3 +1,4 @@
+import DomHeleper from '../../helepers/DomHeleper';
 import IVideoData from '../../interfaces/IVideoData';
 import Video from '../../modules/Video';
 import './style.scss';
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       json.videos.forEach((video: IVideoData) => {
         const videoTemplate: HTMLTemplateElement | null = document.querySelector('#video');
-        const videoTemplateNode: DocumentFragment | null = videoTemplate ? videoTemplate.content.cloneNode(true) as DocumentFragment : null;
+        const videoTemplateNode: DocumentFragment | null = videoTemplate ? DomHeleper.cloneNode(videoTemplate.content) : null;
         if (!videoTemplateNode) {
           return
         }

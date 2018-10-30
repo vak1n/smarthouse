@@ -1,3 +1,4 @@
+import DomHeleper from '../../helepers/DomHeleper';
 import IEventData from '../../interfaces/IEventData';
 import ITouch from '../../interfaces/ITouch';
 import Touch from '../../modules/Touch';
@@ -15,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       json.events.forEach((event: IEventData) => {
         const eventTemplateNode: HTMLTemplateElement | null = document.querySelector('#event');
-        const eventTemplate: DocumentFragment | null = eventTemplateNode ? eventTemplateNode.content.cloneNode(true) as DocumentFragment : null;
+        const eventTemplate: DocumentFragment | null = eventTemplateNode ? DomHeleper.cloneNode(eventTemplateNode.content) : null;
 
         if (!eventTemplate) {
           return;
@@ -60,18 +61,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (event.description || event.data) {
           const eventDataNode: HTMLTemplateElement | null = eventsNode.querySelector('#eventData');
-          const eventDataTemplate: DocumentFragment | null = eventDataNode ? eventDataNode.content.cloneNode(true) as DocumentFragment : null;
+          const eventDataTemplate: DocumentFragment | null = eventDataNode ? DomHeleper.cloneNode(eventDataNode.content) : null;
           const dataNode: HTMLElement | null = eventDataTemplate ? eventDataTemplate.querySelector('.event__data') : null;
           const eventGraphNode: HTMLTemplateElement | null = eventsNode.querySelector('#eventGraph');
-          const eventGraphTemplate: DocumentFragment | null = eventGraphNode ? eventGraphNode.content.cloneNode(true) as DocumentFragment : null;
+          const eventGraphTemplate: DocumentFragment | null = eventGraphNode ? DomHeleper.cloneNode(eventGraphNode.content) : null;
           const eventMicroclimateNode: HTMLTemplateElement | null = eventsNode.querySelector('#eventMicroclimate');
-          const eventMicroclimateTemplate: DocumentFragment | null = eventMicroclimateNode ? eventMicroclimateNode.content.cloneNode(true) as DocumentFragment : null;
+          const eventMicroclimateTemplate: DocumentFragment | null = eventMicroclimateNode ? DomHeleper.cloneNode(eventMicroclimateNode.content) : null;
           const eventMediaNode: HTMLTemplateElement | null = eventsNode.querySelector('#eventMedia');
-          const eventMediaTemplate: DocumentFragment | null = eventMediaNode ? eventMediaNode.content.cloneNode(true) as DocumentFragment : null;
+          const eventMediaTemplate: DocumentFragment | null = eventMediaNode ? DomHeleper.cloneNode(eventMediaNode.content) : null;
           const eventButtonsNode: HTMLTemplateElement | null = eventsNode.querySelector('#eventButtons');
-          const eventButtonsTemplate: DocumentFragment | null = eventButtonsNode ? eventButtonsNode.content.cloneNode(true) as DocumentFragment : null;
+          const eventButtonsTemplate: DocumentFragment | null = eventButtonsNode ? DomHeleper.cloneNode(eventButtonsNode.content) : null;
           const eventWalleNode: HTMLTemplateElement | null = eventsNode.querySelector('#eventWalle');
-          const eventWalleTemplate: DocumentFragment | null = eventWalleNode ? eventWalleNode.content.cloneNode(true) as DocumentFragment : null;
+          const eventWalleTemplate: DocumentFragment | null = eventWalleNode ? DomHeleper.cloneNode(eventWalleNode.content) : null;
 
           if (event.data) {
             if (event.data.type && eventDataTemplate && eventGraphTemplate) {
@@ -146,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         } else {
           const eventControlsNode: HTMLTemplateElement | null = eventsNode.querySelector('#eventControls');
-          const eventControlsTemplate: DocumentFragment | null = eventControlsNode ? eventControlsNode.content.cloneNode(true) as DocumentFragment : null;
+          const eventControlsTemplate: DocumentFragment | null = eventControlsNode ? DomHeleper.cloneNode(eventControlsNode.content) : null;
           if (eventControlsTemplate) {
             const eventNode = eventControlsTemplate.querySelector('.event');
             if (eventNode) {
