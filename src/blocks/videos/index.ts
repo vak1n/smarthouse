@@ -1,4 +1,4 @@
-import DomHeleper from '../../helepers/DomHeleper';
+import DomHeleper from '../../helpers/DomHelper';
 import IVideoData from '../../interfaces/IVideoData';
 import Video from '../../modules/Video';
 import './style.scss';

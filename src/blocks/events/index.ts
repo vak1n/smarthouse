@@ -1,4 +1,4 @@
-import DomHeleper from '../../helepers/DomHeleper';
+import DomHeleper from '../../helpers/DomHelper';
 import IEventData from '../../interfaces/IEventData';
 import ITouch from '../../interfaces/ITouch';
 import Touch from '../../modules/Touch';

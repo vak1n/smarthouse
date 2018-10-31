@@ -1,4 +1,4 @@
-import DomHeleper from '../../helepers/DomHeleper';
+import DomHeleper from '../../helpers/DomHelper';
 import IItemMenuData from '../../interfaces/IItemMenuData';
 import './style.scss';
 
