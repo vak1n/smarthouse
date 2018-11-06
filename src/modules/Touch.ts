@@ -1,10 +1,18 @@
-export default class Touch {
-  /**
-   * @param {Element} imgNode
-   * @param {Element} zoomNode
-   * @param {Element} brightnessNode
-   */
-  constructor(imgNode, zoomNode, brightnessNode) {
+import ITouch from '../interfaces/ITouch';
+
+export default class Touch implements ITouch {
+  public imgNode: HTMLImageElement;
+  public zoomNode: HTMLInputElement;
+  public brightnessNode: HTMLInputElement;
+  protected state: {[key: string]: PointerEvent[]};
+  protected zoom: number;
+  protected deltaX: number;
+  protected deltaY: number;
+  protected brightness: number;
+  protected segment: number;
+  protected angle: number;
+
+  constructor(imgNode: HTMLImageElement, zoomNode: HTMLInputElement, brightnessNode: HTMLInputElement) {
     this.state = {};
     this.imgNode = imgNode;
     this.zoomNode = zoomNode;
@@ -17,43 +25,46 @@ export default class Touch {
     this.angle = 0;
   }
 
-  init() {
-    this.imgNode.addEventListener('pointerdown', ev => {
+  public init(): void {
+    this.imgNode.addEventListener('pointerdown', (ev) => {
       this.downHandler(ev);
     });
-    this.imgNode.addEventListener('pointermove', ev => {
+    this.imgNode.addEventListener('pointermove', (ev) => {
       this.moveHandler(ev);
     });
-    this.imgNode.addEventListener('pointerup', ev => {
+    this.imgNode.addEventListener('pointerup', (ev) => {
       this.upHandler(ev);
     });
-    this.imgNode.addEventListener('pointercancel', ev => {
+    this.imgNode.addEventListener('pointercancel', (ev) => {
       this.upHandler(ev);
     });
-    this.imgNode.addEventListener('pointerout', ev => {
+    this.imgNode.addEventListener('pointerout', (ev) => {
       this.upHandler(ev);
     });
-    this.imgNode.addEventListener('pointerleave', ev => {
+    this.imgNode.addEventListener('pointerleave', (ev) => {
       this.upHandler(ev);
     });
 
-    this.zoomNode.addEventListener('input', ev => {
-      this.zoom = this.zoomNode.value;
+    this.zoomNode.addEventListener('input', (ev) => {
+      this.zoom = Number(this.zoomNode.value);
       this.setStyle();
-      this.zoomNode.previousElementSibling.textContent = this.zoom;
+      const labelNode = this.zoomNode.previousElementSibling;
+      if (labelNode) {
+        labelNode.textContent = String(this.zoom);
+      }
     });
 
-    this.brightnessNode.addEventListener('input', ev => {
-      this.brightness = this.brightnessNode.value;
+    this.brightnessNode.addEventListener('input', (ev) => {
+      this.brightness = Number(this.brightnessNode.value);
       this.setStyle();
-      this.brightnessNode.previousElementSibling.textContent = this.brightness;
+      const labelNode = this.zoomNode.previousElementSibling;
+      if (labelNode) {
+        labelNode.textContent = String(this.brightness);
+      }
     });
   }
 
-  /**
-   * @param {Event} ev
-   */
-  downHandler(ev) {
+  public downHandler(ev: PointerEvent): void {
     this.imgNode.setPointerCapture(ev.pointerId);
     this.state[ev.pointerId] = [ev];
     if (this.state[ev.pointerId - 1]) {
@@ -62,10 +73,7 @@ export default class Touch {
     }
   }
 
-  /**
-   * @param {Event} ev
-   */
-  moveHandler(ev) {
+  public moveHandler(ev: PointerEvent): void {
     switch (Object.keys(this.state).length) {
       case 1:
         // swipe
@@ -118,10 +126,16 @@ export default class Touch {
     }
 
     this.setStyle();
-    this.zoomNode.value = this.zoom;
-    this.zoomNode.previousElementSibling.textContent = this.zoom;
-    this.brightnessNode.value = this.brightness;
-    this.brightnessNode.previousElementSibling.textContent = this.brightness;
+    this.zoomNode.value = String(this.zoom);
+    const zoomLabelNode: HTMLElement | null = this.zoomNode.previousElementSibling as HTMLElement;
+    if (zoomLabelNode) {
+      zoomLabelNode.textContent = String(this.zoom);
+    }
+    this.brightnessNode.value = String(this.brightness);
+    const brightnessLabelNode: HTMLElement | null = this.brightnessNode.previousElementSibling as HTMLElement;
+    if (brightnessLabelNode) {
+      brightnessLabelNode.textContent = String(this.brightness);
+    }
 
     if (this.state[ev.pointerId].length >= 3) {
       this.state[ev.pointerId].pop();
@@ -129,27 +143,24 @@ export default class Touch {
     this.state[ev.pointerId].push(ev);
   }
 
-  setStyle() {
+  public getSegment(ev2: PointerEvent, ev1: PointerEvent): number {
+    return Math.sqrt((Math.round(ev2.x) - Math.round(ev1.x)) ** 2 + (Math.round(ev2.y) - Math.round(ev1.y)) ** 2);
+  }
+
+  public getAngle(ev2: PointerEvent, ev1: PointerEvent): number {
+    return (Math.atan2(Math.round(ev2.y) - Math.round(ev1.y), Math.round(ev2.x) - Math.round(ev1.x)) * 180) / Math.PI;
+  }
+
+  protected setStyle(): void {
     const scale = 1 + this.zoom / 10;
     this.imgNode.style.transform = `
-      scale(${scale}) 
-      translateX(${Math.round(this.deltaX / scale)}px) 
+      scale(${scale})
+      translateX(${Math.round(this.deltaX / scale)}px)
       translateY(${Math.round(this.deltaY / scale)}px)`;
     this.imgNode.style.filter = `brightness(${this.brightness}%)`;
   }
 
-  /**
-   * @param {Event} ev
-   */
-  upHandler(ev) {
+  protected upHandler(ev: PointerEvent): void {
     delete this.state[ev.pointerId];
-  }
-
-  getSegment(ev2, ev1) {
-    return Math.sqrt((Math.round(ev2.x) - Math.round(ev1.x)) ** 2 + (Math.round(ev2.y) - Math.round(ev1.y)) ** 2);
-  }
-
-  getAngle(ev2, ev1) {
-    return (Math.atan2(Math.round(ev2.y) - Math.round(ev1.y), Math.round(ev2.x) - Math.round(ev1.x)) * 180) / Math.PI;
   }
 }
