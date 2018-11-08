@@ -1,9 +1,10 @@
 import DomHeleper from '../helpers/DomHelper';
+import IComponent from '../interfaces/IComponent';
 import IItemMenuData from '../interfaces/IItemMenuData';
 
-export default class MenuComponent {
-  private menuListNode: HTMLElement;
-  private menuItemNode: HTMLTemplateElement;
+export default class MenuComponent implements IComponent<IItemMenuData[]> {
+  protected menuListNode: HTMLElement;
+  protected menuItemNode: HTMLTemplateElement;
 
   constructor(menuListNode: HTMLElement, menuItemNode: HTMLTemplateElement) {
     this.menuListNode = menuListNode;
