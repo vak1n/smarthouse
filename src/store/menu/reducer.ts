@@ -6,9 +6,9 @@ import * as actions from './actions';
 
 const initialState: IItemMenuData[] = menu.links;
 
-export const menuReducer: IReducer<IItemMenuData[]> = (
+export const menuReducer: IReducer<IItemMenuData> = (
   state = initialState,
-  action: IAction,
+  action: IAction<IItemMenuData>,
 ) => {
   switch (action.type) {
     case actions.MENU_SELECT: {
